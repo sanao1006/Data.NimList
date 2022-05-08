@@ -189,3 +189,17 @@ proc permutations*(a:string,n:int=a.len):seq[seq[char]] =
           use[i] = false
   var use = newSeq[bool](a.len)
   perm(a, n, use)
+proc concatMap*[T](xs:seq[seq[T]],f:proc,x:T):seq[T] =
+  runnableExamples:
+    func plus(a,b:int):int=return a+b
+    func minus(a,b:int):int=return a-b
+    func product(a,b:float):float=return a*b
+    func divide(a,b:int):int = a div b
+    func floatDiv(a,b:float):float = a/b
+    doAssert @[@[1,2,3],@[4,5,6]].concatMap(plus,1) == @[2,3,4,5,6,7]
+    doAssert @[@[1,2,3],@[4,5,6]].concatMap(minus,1) == @[0,1,2,3,4,5]
+    doAssert @[@[1,2,3],@[4,5,6]].concatMap(divide,2) == @[0,1,1,2,2,3]
+    doAssert @[@[1.1,2.2,3.3],@[4.4,5.5,10.0]].concatMap(product,2.0) == @[2.2,4.4,6.6,8.8,11.0,20.0]
+    doAssert @[@[1.0,2.0,3.0],@[4.0,5.0,6.0]].concatMap(floatDiv,2) == @[0.5,1.0,1.5,2.0,2.5,3.0]
+  return xs.mapIt(it.mapIt(it.f(x))).concat
+
