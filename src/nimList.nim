@@ -13,7 +13,6 @@ proc `++`*[T](x:seq[T],y:seq[T]):seq[T] =
   return x & y
 
 proc `++`*(x:string,y:string):string = 
-  ## Append two lists
   runnableExamples:
     doAssert "abc" ++ "def" == "abcdef"
   return x & y
@@ -27,7 +26,6 @@ proc head*[T](x:seq[T]):T =
   return x[0]
 
 proc head*(x:string):char =
-  ## Return the first element of a list
   runnableExamples:
     doAssert "abcdefg".head == 'a'
   return x[0]
@@ -41,7 +39,6 @@ proc last*[T](x:seq[T]):T =
   return x[x.len - 1]
 
 proc last*(x:string):char =
-  ## Return the last element of a list
   runnableExamples:
     doAssert "abcdefg".last == 'g'
   return x[x.len - 1]
@@ -55,7 +52,6 @@ proc tail*[T](x:seq[T]):seq[T] =
   return x[1 ..< x.len]
 
 proc tail*(x:string):string =
-  ## Return all elements of a list except the first
   runnableExamples:
     doAssert "abcdefg".tail == "bcdefg"
   return x[1 ..< x.len]
@@ -99,7 +95,6 @@ proc uncons*[T](x:seq[T]):Option[(T,seq[T])] =
   if(x.null):return none((T,seq[T])) else:return some((x[0],x[1 ..< x.len]))
 
 proc uncons*(x:string):Option[(char,string)] =
-  ## Return the first element of a list and the rest
   runnableExamples:
     import options
     doAssert uncons("abcde") == some(('a',"bcde"))
@@ -156,3 +151,41 @@ proc transpose*(arr:seq[string]):seq[string] =
     res.add(tmpArr)
   return res.mapIt(it.join())
 
+proc permutations*[T](a: seq[T], n: int = a.len): seq[seq[T]] =
+  runnableExamples:
+    doAssert @[1,2,3].permutations == @[
+     @[1, 2, 3], @[1, 3, 2],
+     @[2, 1, 3],@[2, 3, 1],
+     @[3, 1, 2], @[3, 2, 1]
+     ]
+  proc perm[T](a: openArray[T], n: int, use: var seq[bool]): seq[seq[T]] =
+    result = newSeq[seq[T]]()
+    if n <= 0: return
+    for i in 0 .. a.high:
+      if not use[i]:
+        if n == 1:result.add(@[a[i]])
+        else:
+          use[i] = true
+          for j in perm(a, n - 1, use):result.add(a[i] & j)
+          use[i] = false
+  var use = newSeq[bool](a.len)
+  perm(a, n, use)
+proc permutations*(a:string,n:int=a.len):seq[seq[char]] =
+  runnableExamples:
+    doAssert "aiu".permutations == @[
+      @['a', 'i', 'u'], @['a', 'u', 'i'], 
+      @['i', 'a', 'u'], @['i', 'u', 'a'], 
+      @['u', 'a', 'i'], @['u', 'i', 'a']
+    ]
+  proc perm[T](a: openArray[T], n: int, use: var seq[bool]): seq[seq[T]] =
+    result = newSeq[seq[T]]()
+    if n <= 0: return
+    for i in 0 .. a.high:
+      if not use[i]:
+        if n == 1:result.add(@[a[i]])
+        else:
+          use[i] = true
+          for j in perm(a, n - 1, use):result.add(a[i] & j)
+          use[i] = false
+  var use = newSeq[bool](a.len)
+  perm(a, n, use)
