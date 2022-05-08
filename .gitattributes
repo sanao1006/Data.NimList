@@ -1,0 +1,3 @@
+src/htmldocs/*.html linguist-detectable=false
+src/htmldocs/*.css linguist-detectable=false
+src/*.nim linguist-detectable=true
