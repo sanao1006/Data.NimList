@@ -17,7 +17,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>src/NimList</title>
+<title>src/nimList</title>
 <link rel="stylesheet" type="text/css" href="nimdoc.out.css">
 
 <script type="text/javascript" src="dochack.js"></script>
@@ -69,7 +69,7 @@ window.addEventListener('DOMContentLoaded', main);
 <body>
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">src/NimList</h1>
+    <h1 class="title">src/nimList</h1>
     <div class="row">
   <div class="three columns">
   <div class="theme-switch-wrapper">
@@ -113,6 +113,13 @@ window.addEventListener('DOMContentLoaded', main);
     title="concatMap[T](xs: seq[seq[T]]; f: proc; x: T): seq[T]">concatMap[T](xs: seq[seq[T]]; f: proc; x: T): seq[T]</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">drop
+      <li><a class="reference" href="#drop%2Cint%2Cstring"
+    title="drop(n: int; xs: string): string">drop(n: int; xs: string): string</a></li>
+  <li><a class="reference" href="#drop%2Cint%2Cseq%5BT%5D"
+    title="drop[T](n: int; xs: seq[T]): seq[T]">drop[T](n: int; xs: seq[T]): seq[T]</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">head
       <li><a class="reference" href="#head%2Cstring"
     title="head(x: string): char">head(x: string): char</a></li>
@@ -128,8 +135,15 @@ window.addEventListener('DOMContentLoaded', main);
 
   </ul>
   <ul class="simple nested-toc-section">intersperse
-      <li><a class="reference" href="#intersperse%2Cstring%2Cchar"
-    title="intersperse(s: string; x: char): string">intersperse(s: string; x: char): string</a></li>
+      <li><a class="reference" href="#intersperse%2Cchar%2Cstring"
+    title="intersperse(x: char; s: string): string">intersperse(x: char; s: string): string</a></li>
+  <li><a class="reference" href="#intersperse%2CT%2Cseq%5BT%5D"
+    title="intersperse[T](s: T; x: seq[T]): seq[T]">intersperse[T](s: T; x: seq[T]): seq[T]</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">iterate
+      <li><a class="reference" href="#iterate%2Cint%2Cproc%28T%29%2CT"
+    title="iterate[T](number: int; f: proc (b: T): T {.closure.}; start: T): seq[T]">iterate[T](number: int; f: proc (b: T): T {.closure.}; start: T): seq[T]</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">last
@@ -153,9 +167,55 @@ window.addEventListener('DOMContentLoaded', main);
     title="permutations[T](a: seq[T]; n: int = a.len): seq[seq[T]]">permutations[T](a: seq[T]; n: int = a.len): seq[seq[T]]</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">scanl
+      <li><a class="reference" href="#scanl%2Cproc%28float%2Cfloat%29%2Cfloat%2Cseq%5Bfloat%5D"
+    title="scanl(f: proc (a, b: float): float {.closure.}; start: float; xs: seq[float]): seq[
+    float]">scanl(f: proc (a, b: float): float {.closure.}; start: float; xs: seq[float]): seq[
+    float]</a></li>
+  <li><a class="reference" href="#scanl%2Cproc%28int%2Cint%29%2Cint%2Cseq%5Bint%5D"
+    title="scanl(f: proc (a, b: int): int {.closure.}; start: int; xs: seq[int]): seq[int]">scanl(f: proc (a, b: int): int {.closure.}; start: int; xs: seq[int]): seq[int]</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">scanl1
+      <li><a class="reference" href="#scanl1%2Cproc%28float%2Cfloat%29%2Cseq%5Bfloat%5D"
+    title="scanl1(f: proc (a, b: float): float {.closure.}; xs: seq[float]): seq[float]">scanl1(f: proc (a, b: float): float {.closure.}; xs: seq[float]): seq[float]</a></li>
+  <li><a class="reference" href="#scanl1%2Cproc%28int%2Cint%29%2Cseq%5Bint%5D"
+    title="scanl1(f: proc (a, b: int): int {.closure.}; xs: seq[int]): seq[int]">scanl1(f: proc (a, b: int): int {.closure.}; xs: seq[int]): seq[int]</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">scanr
+      <li><a class="reference" href="#scanr%2Cproc%28float%2Cfloat%29%2Cfloat%2Cseq%5Bfloat%5D"
+    title="scanr(f: proc (a, b: float): float {.closure.}; start: float; xs: seq[float]): seq[
+    float]">scanr(f: proc (a, b: float): float {.closure.}; start: float; xs: seq[float]): seq[
+    float]</a></li>
+  <li><a class="reference" href="#scanr%2Cproc%28int%2Cint%29%2Cint%2Cseq%5Bint%5D"
+    title="scanr(f: proc (a, b: int): int {.closure.}; start: int; xs: seq[int]): seq[int]">scanr(f: proc (a, b: int): int {.closure.}; start: int; xs: seq[int]): seq[int]</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">scanr1
+      <li><a class="reference" href="#scanr1%2Cproc%28float%2Cfloat%29%2Cfloat%2Cseq%5Bfloat%5D"
+    title="scanr1(f: proc (a, b: float): float {.closure.}; start: float; xs: seq[float]): seq[
+    float]">scanr1(f: proc (a, b: float): float {.closure.}; start: float; xs: seq[float]): seq[
+    float]</a></li>
+  <li><a class="reference" href="#scanr1%2Cproc%28int%2Cint%29%2Cseq%5Bint%5D"
+    title="scanr1(f: proc (a, b: int): int {.closure.}; xs: seq[int]): seq[int]">scanr1(f: proc (a, b: int): int {.closure.}; xs: seq[int]): seq[int]</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">singleton
       <li><a class="reference" href="#singleton%2CT"
     title="singleton[T](x: T): seq[T]">singleton[T](x: T): seq[T]</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">splitAt
+      <li><a class="reference" href="#splitAt%2CPositive%2Cstring"
+    title="splitAt(n: Positive; xs: string): (string, string)">splitAt(n: Positive; xs: string): (string, string)</a></li>
+  <li><a class="reference" href="#splitAt%2CPositive%2Cseq%5BT%5D"
+    title="splitAt[T](n: Positive; xs: seq[T]): (seq[T], seq[T])">splitAt[T](n: Positive; xs: seq[T]): (seq[T], seq[T])</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">subsequences
+      <li><a class="reference" href="#subsequences%2Cstring"
+    title="subsequences(s: string): seq[string]">subsequences(s: string): seq[string]</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">tail
@@ -163,6 +223,18 @@ window.addEventListener('DOMContentLoaded', main);
     title="tail(x: string): string">tail(x: string): string</a></li>
   <li><a class="reference" href="#tail%2Cseq%5BT%5D"
     title="tail[T](x: seq[T]): seq[T]">tail[T](x: seq[T]): seq[T]</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">take
+      <li><a class="reference" href="#take%2Cint%2Cstring"
+    title="take(n: int; xs: string): string">take(n: int; xs: string): string</a></li>
+  <li><a class="reference" href="#take%2Cint%2Cseq%5BT%5D"
+    title="take[T](n: int; xs: seq[T]): seq[T]">take[T](n: int; xs: seq[T]): seq[T]</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">takeWhile
+      <li><a class="reference" href="#takeWhile%2Cproc%28T%29%2Cseq%5BT%5D"
+    title="takeWhile[T](f: proc (a: T): bool {.closure.}; xs: seq[T]): seq[T]">takeWhile[T](f: proc (a: T): bool {.closure.}; xs: seq[T]): seq[T]</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">transpose
@@ -235,6 +307,28 @@ Append two lists
 
 </dd>
 </div>
+<div id="drop,int,string">
+<dt><pre><span class="Keyword">proc</span> <a href="#drop%2Cint%2Cstring"><span class="Identifier">drop</span></a><span class="Other">(</span><span class="Identifier">n</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">doAssert</span> <span class="Identifier">drop</span><span class="Punctuation">(</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="StringLit">&quot;123456&quot;</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="StringLit">&quot;3456&quot;</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">drop</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="StringLit">&quot;123&quot;</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="StringLit">&quot;&quot;</span></pre>
+
+</dd>
+</div>
+<div id="drop,int,seq[T]">
+<dt><pre><span class="Keyword">proc</span> <a href="#drop%2Cint%2Cseq%5BT%5D"><span class="Identifier">drop</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">n</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span></pre></dt>
+<dd>
+
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">doAssert</span> <span class="Identifier">drop</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="DecNumber">5</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="DecNumber">5</span><span class="Punctuation">]</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">drop</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="Punctuation">]</span></pre>
+
+</dd>
+</div>
 <div id="head,string">
 <dt><pre><span class="Keyword">proc</span> <a href="#head%2Cstring"><span class="Identifier">head</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">char</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
@@ -279,14 +373,33 @@ Return all elements of a list except the last
 
 </dd>
 </div>
-<div id="intersperse,string,char">
-<dt><pre><span class="Keyword">proc</span> <a href="#intersperse%2Cstring%2Cchar"><span class="Identifier">intersperse</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">char</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<div id="intersperse,char,string">
+<dt><pre><span class="Keyword">proc</span> <a href="#intersperse%2Cchar%2Cstring"><span class="Identifier">intersperse</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">char</span><span class="Other">;</span> <span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 
 <p><strong class="examples_text">Example:</strong></p>
-<pre class="listing"><span class="Identifier">doAssert</span> <span class="StringLit">&quot;1234&quot;</span><span class="Operator">.</span><span class="Identifier">intersperse</span><span class="Punctuation">(</span><span class="CharLit">','</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="StringLit">&quot;1,2,3,4&quot;</span>
-<span class="Identifier">doAssert</span> <span class="StringLit">&quot;ABCD&quot;</span><span class="Operator">.</span><span class="Identifier">intersperse</span><span class="Punctuation">(</span><span class="CharLit">' '</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="StringLit">&quot;A B C D&quot;</span></pre>
+<pre class="listing"><span class="Identifier">doAssert</span>  <span class="Identifier">intersperse</span><span class="Punctuation">(</span><span class="CharLit">','</span><span class="Punctuation">,</span> <span class="StringLit">&quot;1234&quot;</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="StringLit">&quot;1,2,3,4&quot;</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">intersperse</span><span class="Punctuation">(</span><span class="CharLit">' '</span><span class="Punctuation">,</span> <span class="StringLit">&quot;ABCD&quot;</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="StringLit">&quot;A B C D&quot;</span></pre>
+
+</dd>
+</div>
+<div id="intersperse,T,seq[T]">
+<dt><pre><span class="Keyword">proc</span> <a href="#intersperse%2CT%2Cseq%5BT%5D"><span class="Identifier">intersperse</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span></pre></dt>
+<dd>
+
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">doAssert</span> <span class="Identifier">intersperse</span><span class="Punctuation">(</span><span class="FloatNumber">1.1</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="FloatNumber">2.2</span><span class="Punctuation">,</span><span class="FloatNumber">3.3</span><span class="Punctuation">,</span><span class="FloatNumber">4.4</span><span class="Punctuation">,</span><span class="FloatNumber">5.5</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="FloatNumber">2.2</span><span class="Punctuation">,</span><span class="FloatNumber">1.1</span><span class="Punctuation">,</span><span class="FloatNumber">3.3</span><span class="Punctuation">,</span><span class="FloatNumber">1.1</span><span class="Punctuation">,</span><span class="FloatNumber">4.4</span><span class="Punctuation">,</span><span class="FloatNumber">1.1</span><span class="Punctuation">,</span><span class="FloatNumber">5.5</span><span class="Punctuation">]</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">intersperse</span><span class="Punctuation">(</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="DecNumber">5</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">5</span><span class="Punctuation">]</span></pre>
+
+</dd>
+</div>
+<div id="iterate,int,proc(T),T">
+<dt><pre><span class="Keyword">proc</span> <a href="#iterate%2Cint%2Cproc%28T%29%2CT"><span class="Identifier">iterate</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">number</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> {.<span class="Identifier">closure</span>.}<span class="Other">;</span> <span class="Identifier">start</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span></pre></dt>
+<dd>
+
+
 
 </dd>
 </div>
@@ -367,6 +480,78 @@ Return the last element of a list
 
 </dd>
 </div>
+<div id="scanl,proc(float,float),float,seq[float]">
+<dt><pre><span class="Keyword">proc</span> <a href="#scanl%2Cproc%28float%2Cfloat%29%2Cfloat%2Cseq%5Bfloat%5D"><span class="Identifier">scanl</span></a><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> {.<span class="Identifier">closure</span>.}<span class="Other">;</span> <span class="Identifier">start</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span>
+           <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">float</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">float</span><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="scanl,proc(int,int),int,seq[int]">
+<dt><pre><span class="Keyword">proc</span> <a href="#scanl%2Cproc%28int%2Cint%29%2Cint%2Cseq%5Bint%5D"><span class="Identifier">scanl</span></a><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> {.<span class="Identifier">closure</span>.}<span class="Other">;</span> <span class="Identifier">start</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span>
+    <span class="Identifier">int</span><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="scanl1,proc(float,float),seq[float]">
+<dt><pre><span class="Keyword">proc</span> <a href="#scanl1%2Cproc%28float%2Cfloat%29%2Cseq%5Bfloat%5D"><span class="Identifier">scanl1</span></a><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> {.<span class="Identifier">closure</span>.}<span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">float</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">float</span><span class="Other">]</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="scanl1,proc(int,int),seq[int]">
+<dt><pre><span class="Keyword">proc</span> <a href="#scanl1%2Cproc%28int%2Cint%29%2Cseq%5Bint%5D"><span class="Identifier">scanl1</span></a><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> {.<span class="Identifier">closure</span>.}<span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="scanr,proc(float,float),float,seq[float]">
+<dt><pre><span class="Keyword">proc</span> <a href="#scanr%2Cproc%28float%2Cfloat%29%2Cfloat%2Cseq%5Bfloat%5D"><span class="Identifier">scanr</span></a><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> {.<span class="Identifier">closure</span>.}<span class="Other">;</span> <span class="Identifier">start</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span>
+           <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">float</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">float</span><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="scanr,proc(int,int),int,seq[int]">
+<dt><pre><span class="Keyword">proc</span> <a href="#scanr%2Cproc%28int%2Cint%29%2Cint%2Cseq%5Bint%5D"><span class="Identifier">scanr</span></a><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> {.<span class="Identifier">closure</span>.}<span class="Other">;</span> <span class="Identifier">start</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span>
+    <span class="Identifier">int</span><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="scanr1,proc(float,float),float,seq[float]">
+<dt><pre><span class="Keyword">proc</span> <a href="#scanr1%2Cproc%28float%2Cfloat%29%2Cfloat%2Cseq%5Bfloat%5D"><span class="Identifier">scanr1</span></a><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> {.<span class="Identifier">closure</span>.}<span class="Other">;</span> <span class="Identifier">start</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span>
+            <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">float</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">float</span><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="scanr1,proc(int,int),seq[int]">
+<dt><pre><span class="Keyword">proc</span> <a href="#scanr1%2Cproc%28int%2Cint%29%2Cseq%5Bint%5D"><span class="Identifier">scanr1</span></a><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> {.<span class="Identifier">closure</span>.}<span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
 <div id="singleton,T">
 <dt><pre><span class="Keyword">proc</span> <a href="#singleton%2CT"><span class="Identifier">singleton</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span></pre></dt>
 <dd>
@@ -377,6 +562,35 @@ Return the last element of a list
 <span class="Identifier">doAssert</span> <span class="Identifier">singleton</span><span class="Punctuation">(</span><span class="StringLit">&quot;abc&quot;</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="StringLit">&quot;abc&quot;</span><span class="Punctuation">]</span>
 <span class="Identifier">doAssert</span> <span class="Identifier">singleton</span><span class="Punctuation">(</span><span class="FloatNumber">1.1</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="FloatNumber">1.1</span><span class="Punctuation">]</span>
 <span class="Identifier">doAssert</span> <span class="Identifier">singleton</span><span class="Punctuation">(</span><span class="CharLit">'c'</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="CharLit">'c'</span><span class="Punctuation">]</span></pre>
+
+</dd>
+</div>
+<div id="splitAt,Positive,string">
+<dt><pre><span class="Keyword">proc</span> <a href="#splitAt%2CPositive%2Cstring"><span class="Identifier">splitAt</span></a><span class="Other">(</span><span class="Identifier">n</span><span class="Other">:</span> <span class="Identifier">Positive</span><span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Other">(</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">string</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">doAssert</span> <span class="Identifier">splitAt</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="StringLit">&quot;12345678&quot;</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Punctuation">(</span><span class="StringLit">&quot;123&quot;</span><span class="Punctuation">,</span><span class="StringLit">&quot;45678&quot;</span><span class="Punctuation">)</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">splitAt</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="StringLit">&quot;123&quot;</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Punctuation">(</span><span class="StringLit">&quot;123&quot;</span><span class="Punctuation">,</span><span class="StringLit">&quot;&quot;</span><span class="Punctuation">)</span></pre>
+
+</dd>
+</div>
+<div id="splitAt,Positive,seq[T]">
+<dt><pre><span class="Keyword">proc</span> <a href="#splitAt%2CPositive%2Cseq%5BT%5D"><span class="Identifier">splitAt</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">n</span><span class="Other">:</span> <span class="Identifier">Positive</span><span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Other">(</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span></pre></dt>
+<dd>
+
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">doAssert</span> <span class="Identifier">splitAt</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="DecNumber">5</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">]</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="DecNumber">5</span><span class="Punctuation">]</span><span class="Punctuation">)</span></pre>
+
+</dd>
+</div>
+<div id="subsequences,string">
+<dt><pre><span class="Keyword">proc</span> <a href="#subsequences%2Cstring"><span class="Identifier">subsequences</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
 
 </dd>
 </div>
@@ -399,6 +613,41 @@ Return all elements of a list except the first
 <pre class="listing"><span class="Identifier">doAssert</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">]</span><span class="Operator">.</span><span class="Identifier">tail</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">]</span>
 <span class="Identifier">doAssert</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="StringLit">&quot;abc&quot;</span><span class="Punctuation">,</span><span class="StringLit">&quot;def&quot;</span><span class="Punctuation">,</span><span class="StringLit">&quot;ghi&quot;</span><span class="Punctuation">]</span><span class="Operator">.</span><span class="Identifier">tail</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="StringLit">&quot;def&quot;</span><span class="Punctuation">,</span><span class="StringLit">&quot;ghi&quot;</span><span class="Punctuation">]</span>
 <span class="Identifier">doAssert</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="FloatNumber">1.1</span><span class="Punctuation">,</span><span class="FloatNumber">2.2</span><span class="Punctuation">,</span><span class="FloatNumber">3.3</span><span class="Punctuation">]</span><span class="Operator">.</span><span class="Identifier">tail</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="FloatNumber">2.2</span><span class="Punctuation">,</span><span class="FloatNumber">3.3</span><span class="Punctuation">]</span></pre>
+
+</dd>
+</div>
+<div id="take,int,string">
+<dt><pre><span class="Keyword">proc</span> <a href="#take%2Cint%2Cstring"><span class="Identifier">take</span></a><span class="Other">(</span><span class="Identifier">n</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="take,int,seq[T]">
+<dt><pre><span class="Keyword">proc</span> <a href="#take%2Cint%2Cseq%5BT%5D"><span class="Identifier">take</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">n</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span></pre></dt>
+<dd>
+
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">doAssert</span> <span class="Identifier">take</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">]</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">take</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="FloatNumber">1.1</span><span class="Punctuation">,</span><span class="FloatNumber">2.2</span><span class="Punctuation">,</span><span class="FloatNumber">3.3</span><span class="Punctuation">,</span><span class="FloatNumber">4.4</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="FloatNumber">1.1</span><span class="Punctuation">,</span><span class="FloatNumber">2.2</span><span class="Punctuation">,</span><span class="FloatNumber">3.3</span><span class="Punctuation">]</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">take</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="StringLit">&quot;123&quot;</span><span class="Punctuation">,</span><span class="StringLit">&quot;456&quot;</span><span class="Punctuation">,</span><span class="StringLit">&quot;789&quot;</span><span class="Punctuation">,</span><span class="StringLit">&quot;101112&quot;</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="StringLit">&quot;123&quot;</span><span class="Punctuation">,</span><span class="StringLit">&quot;456&quot;</span><span class="Punctuation">,</span><span class="StringLit">&quot;789&quot;</span><span class="Punctuation">]</span></pre>
+
+</dd>
+</div>
+<div id="takeWhile,proc(T),seq[T]">
+<dt><pre><span class="Keyword">proc</span> <a href="#takeWhile%2Cproc%28T%29%2Cseq%5BT%5D"><span class="Identifier">takeWhile</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">closure</span>.}<span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span></pre></dt>
+<dd>
+
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">g</span><span class="Punctuation">(</span><span class="Identifier">a</span><span class="Punctuation">:</span><span class="Identifier">int</span><span class="Punctuation">)</span><span class="Punctuation">:</span><span class="Identifier">bool</span><span class="Operator">=</span><span class="Keyword">return</span> <span class="Identifier">a</span><span class="Operator">&lt;</span><span class="DecNumber">4</span>
+<span class="Keyword">proc</span> <span class="Identifier">f</span><span class="Punctuation">(</span><span class="Identifier">a</span><span class="Punctuation">:</span><span class="Identifier">int</span><span class="Punctuation">)</span><span class="Punctuation">:</span><span class="Identifier">bool</span><span class="Operator">=</span><span class="Keyword">return</span> <span class="Identifier">a</span><span class="Operator">==</span><span class="DecNumber">3</span>
+<span class="Keyword">proc</span> <span class="Identifier">h</span><span class="Punctuation">(</span><span class="Identifier">a</span><span class="Punctuation">:</span><span class="Identifier">char</span><span class="Punctuation">)</span><span class="Punctuation">:</span><span class="Identifier">bool</span> <span class="Operator">=</span> <span class="Keyword">return</span> <span class="Identifier">a</span> <span class="Operator">&lt;</span> <span class="CharLit">'e'</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">takeWhile</span><span class="Punctuation">(</span><span class="Identifier">g</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="DecNumber">5</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">]</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">takeWhile</span><span class="Punctuation">(</span><span class="Identifier">f</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">]</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">takeWhile</span><span class="Punctuation">(</span><span class="Identifier">h</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="CharLit">'a'</span><span class="Punctuation">,</span><span class="CharLit">'b'</span><span class="Punctuation">,</span><span class="CharLit">'c'</span><span class="Punctuation">,</span><span class="CharLit">'d'</span><span class="Punctuation">,</span><span class="CharLit">'e'</span><span class="Punctuation">,</span><span class="CharLit">'g'</span><span class="Punctuation">,</span><span class="CharLit">'h'</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="CharLit">'a'</span><span class="Punctuation">,</span><span class="CharLit">'b'</span><span class="Punctuation">,</span><span class="CharLit">'c'</span><span class="Punctuation">,</span><span class="CharLit">'d'</span><span class="Punctuation">]</span></pre>
 
 </dd>
 </div>
@@ -460,7 +709,7 @@ Return the first element of a list and the rest
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2022-05-08 10:14:01 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-05-09 10:17:46 UTC</small>
       </div>
     </div>
   </div>

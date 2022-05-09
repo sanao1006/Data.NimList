@@ -222,7 +222,7 @@ proc concatMap*[T](xs:seq[seq[T]],f:proc,x:T):seq[T] =
     doAssert @[@[1.0,2.0,3.0],@[4.0,5.0,6.0]].concatMap(floatDiv,2) == @[0.5,1.0,1.5,2.0,2.5,3.0]
   return xs.mapIt(it.mapIt(it.f(x))).concat
 
-proc subsequences(s:string):seq[string]=
+proc subsequences*(s:string):seq[string]=
   iterator product[T](s: openArray[T], repeat: Positive): seq[T] =
     var counters = newSeq[int](repeat)
     block outer:
@@ -252,7 +252,7 @@ proc subsequences(s:string):seq[string]=
       .foldl(a & b)
     )
 
-proc scanl(f:proc(a,b:int):int{. closure .},start:int,xs:seq[int]):seq[int]=
+proc scanl*(f:proc(a,b:int):int{. closure .},start:int,xs:seq[int]):seq[int]=
   var 
     que = xs.toDeque()
     res = initDeque[int]()
@@ -264,7 +264,7 @@ proc scanl(f:proc(a,b:int):int{. closure .},start:int,xs:seq[int]):seq[int]=
     res.addLast(t)
   return res.toSeq
 
-proc scanl(f:proc(a,b:float):float{. closure .},start:float,xs:seq[float]):seq[float]=
+proc scanl*(f:proc(a,b:float):float{. closure .},start:float,xs:seq[float]):seq[float]=
   var 
     que = xs.toDeque()
     res = initDeque[float]()
@@ -276,7 +276,7 @@ proc scanl(f:proc(a,b:float):float{. closure .},start:float,xs:seq[float]):seq[f
     res.addLast(t)
   return res.toSeq
 
-proc scanl1(f:proc(a,b:int):int{. closure .},xs:seq[int]):seq[int]=
+proc scanl1*(f:proc(a,b:int):int{. closure .},xs:seq[int]):seq[int]=
   var 
     que = xs.toDeque()
     res = initDeque[int]()
@@ -288,7 +288,7 @@ proc scanl1(f:proc(a,b:int):int{. closure .},xs:seq[int]):seq[int]=
     res.addLast(t)
   return res.toSeq
 
-proc scanl1(f:proc(a,b:float):float{. closure .},xs:seq[float]):seq[float]=
+proc scanl1*(f:proc(a,b:float):float{. closure .},xs:seq[float]):seq[float]=
   var 
     que = xs.toDeque()
     res = initDeque[float]()
@@ -300,7 +300,7 @@ proc scanl1(f:proc(a,b:float):float{. closure .},xs:seq[float]):seq[float]=
     res.addLast(t)
   return res.toSeq
 
-proc scanr(f:proc(a,b:int):int {. closure .},start:int,xs:seq[int]):seq[int]=
+proc scanr*(f:proc(a,b:int):int {. closure .},start:int,xs:seq[int]):seq[int]=
   var 
     que = xs.toDeque()
     res = initDeque[int]()
@@ -312,7 +312,7 @@ proc scanr(f:proc(a,b:int):int {. closure .},start:int,xs:seq[int]):seq[int]=
     res.addFirst(t)
   return res.toSeq
 
-proc scanr(f:proc(a,b:float):float {. closure .},start:float,xs:seq[float]):seq[float]=
+proc scanr*(f:proc(a,b:float):float {. closure .},start:float,xs:seq[float]):seq[float]=
   var 
     que = xs.toDeque()
     res = initDeque[float]()
@@ -324,7 +324,7 @@ proc scanr(f:proc(a,b:float):float {. closure .},start:float,xs:seq[float]):seq[
     res.addFirst(t)
   return res.toSeq
 
-proc scanr1(f:proc(a,b:int):int {. closure .},xs:seq[int]):seq[int]=
+proc scanr1*(f:proc(a,b:int):int {. closure .},xs:seq[int]):seq[int]=
   var 
     que = xs.toDeque()
     res = initDeque[int]()
@@ -336,7 +336,7 @@ proc scanr1(f:proc(a,b:int):int {. closure .},xs:seq[int]):seq[int]=
     res.addFirst(t)
   return res.toSeq
 
-proc scanr1(f:proc(a,b:float):float {. closure .},start:float,xs:seq[float]):seq[float]=
+proc scanr1*(f:proc(a,b:float):float {. closure .},start:float,xs:seq[float]):seq[float]=
   var 
     que = xs.toDeque()
     res = initDeque[float]()
@@ -348,7 +348,7 @@ proc scanr1(f:proc(a,b:float):float {. closure .},start:float,xs:seq[float]):seq
     res.addFirst(t)
   return res.toSeq
 
-proc iterate[T](number:int,f:proc(b:T):T{. closure .},start:T):seq[T]=
+proc iterate*[T](number:int,f:proc(b:T):T{. closure .},start:T):seq[T]=
   var res = initDeque[T]()
   res.addLast(start)
   while(not(res.len ==  number)):
@@ -357,3 +357,46 @@ proc iterate[T](number:int,f:proc(b:T):T{. closure .},start:T):seq[T]=
       t = f(s)
     res.addLast(t)
   return res.toSeq
+
+proc take*[T](n:int,xs:seq[T]):seq[T] = 
+  runnableExamples:
+    doAssert take(3,@[1,2,3,4]) == @[1,2,3]
+    doAssert take(3,@[1.1,2.2,3.3,4.4]) == @[1.1,2.2,3.3]
+    doAssert take(3,@["123","456","789","101112"]) == @["123","456","789"]
+  return xs[0..n-1]
+proc take*(n:int,xs:string):string = return xs[0..n-1]
+
+proc drop*(n:int,xs:string):string =
+  runnableExamples:
+    doAssert drop(2,"123456") == "3456"
+    doAssert drop(3,"123") == ""
+  return xs[n..xs.len-1]
+
+proc drop*[T](n:int,xs:seq[T]):seq[T] =
+  runnableExamples:
+    doAssert drop(3,@[1,2,3,4,5]) == @[4,5]
+    doAssert drop(3,@[1,2,3]) == @[]
+  return xs[n..xs.len-1]
+
+proc splitAt*[T](n:Positive,xs:seq[T]):(seq[T],seq[T])=
+  runnableExamples:
+    doAssert splitAt(3,@[1,2,3,4,5]) == (@[1,2,3],@[4,5])
+  return (take(n,xs),drop(n,xs))
+
+proc splitAt*(n:Positive,xs:string):(string,string)=
+  runnableExamples:
+    doAssert splitAt(3,"12345678") == ("123","45678")
+    doAssert splitAt(3,"123") == ("123","")
+  return(take(n,xs),drop(n,xs))
+
+proc takeWhile*[T](f:proc(a:T):bool{. closure .},xs:seq[T]):seq[T] =
+  runnableExamples:
+    proc g(a:int):bool=return a<4
+    proc f(a:int):bool=return a==3
+    proc h(a:char):bool = return a < 'e'
+    doAssert takeWhile(g,@[1,2,3,4,5]) == @[1,2,3]
+    doAssert takeWhile(f,@[3,3,3,4]) == @[3,3,3]
+    doAssert takeWhile(h,@['a','b','c','d','e','g','h']) == @['a','b','c','d']
+  for i in xs:
+    if(not(f(i))):break
+    if(f(i)):result.add(i)
