@@ -13,7 +13,7 @@ jobs:
 
       - name: Get Date
         id: get-date
-        run: echo "::set-output name=date::$(date "+%Y-%m-%d")"
+        run: echo " `date '+%Y-%m-%d'` "
         shell: bash
 
       - name: Cache choosenim
