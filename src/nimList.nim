@@ -109,15 +109,34 @@ proc singleton*[T](x:T):seq[T] =
   result.add(x)
 
 
-proc intersperse*(s:string,x:char):string=
+proc intersperse*(x:char,s:string):string=
   runnableExamples:
-    doAssert "1234".intersperse(',') == "1,2,3,4"
-    doAssert "ABCD".intersperse(' ') == "A B C D"
+    doAssert  intersperse(',', "1234") == "1,2,3,4"
+    doAssert intersperse(' ', "ABCD") == "A B C D"
   var res = newSeq[string]()
   for i in 0..<s.len-1:
     res.add(s[i] & x)
   res.add($s.last)
   return res.join()
+
+proc intersperse*[T](s:T,x:seq[T]):seq[T] =
+  runnableExamples:
+    doAssert intersperse(1.1,@[2.2,3.3,4.4,5.5]) == @[2.2,1.1,3.3,1.1,4.4,1.1,5.5]
+    doAssert intersperse(1,@[2,3,4,5]) == @[2,1,3,1,4,1,5]
+  result = newSeq[T]()
+  result.add(x[0])
+  for i in x.tail:
+    result.add(s)
+    result.add(i)
+
+proc intersperse[T](s:seq[T],x:seq[seq[T]]):seq[seq[T]] =
+  result = x.mapIt(concat(it,s))
+
+proc intercalate[T](x:seq[T],y:seq[seq[T]]):seq[T] =
+  result = intersperse(x,y).foldl(concat(a,b))
+
+proc intercalate(x:string,y:seq[string]):string =
+  result = intersperse(x,y).join ""
 
 import  sequtils
 proc transpose*[T](arr:seq[seq[T]]):seq[seq[T]] = 
