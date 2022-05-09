@@ -251,3 +251,99 @@ proc subsequences(s:string):seq[string]=
       .mapIt($it)
       .foldl(a & b)
     )
+
+proc scanl(f:proc(a,b:int):int{. closure .},start:int,xs:seq[int]):seq[int]=
+  var 
+    que = xs.toDeque()
+    res = initDeque[int]()
+  res.addLast(start)
+  while(que.len>0):
+    var 
+      s = que.popFirst()
+      t = f(res.peekLast,s)
+    res.addLast(t)
+  return res.toSeq
+
+proc scanl(f:proc(a,b:float):float{. closure .},start:float,xs:seq[float]):seq[float]=
+  var 
+    que = xs.toDeque()
+    res = initDeque[float]()
+  res.addLast(start)
+  while(que.len>0):
+    var 
+      s = que.popFirst()
+      t = f(res.peekLast,s)
+    res.addLast(t)
+  return res.toSeq
+
+proc scanl1(f:proc(a,b:int):int{. closure .},xs:seq[int]):seq[int]=
+  var 
+    que = xs.toDeque()
+    res = initDeque[int]()
+  res.addLast(1)
+  while(que.len>0):
+    var 
+      s = que.popFirst()
+      t = f(res.peekLast,s)
+    res.addLast(t)
+  return res.toSeq
+
+proc scanl1(f:proc(a,b:float):float{. closure .},xs:seq[float]):seq[float]=
+  var 
+    que = xs.toDeque()
+    res = initDeque[float]()
+  res.addLast(1.0)
+  while(que.len>0):
+    var 
+      s = que.popFirst()
+      t = f(res.peekLast,s)
+    res.addLast(t)
+  return res.toSeq
+
+proc scanr(f:proc(a,b:int):int {. closure .},start:int,xs:seq[int]):seq[int]=
+  var 
+    que = xs.toDeque()
+    res = initDeque[int]()
+  res.addLast(start)
+  while(que.len>0):
+    var 
+      s = que.popLast()
+      t = f(s,res.peekFirst)
+    res.addFirst(t)
+  return res.toSeq
+
+proc scanr(f:proc(a,b:float):float {. closure .},start:float,xs:seq[float]):seq[float]=
+  var 
+    que = xs.toDeque()
+    res = initDeque[float]()
+  res.addLast(start)
+  while(que.len>0):
+    var 
+      s = que.popLast()
+      t = f(s,res.peekFirst)
+    res.addFirst(t)
+  return res.toSeq
+
+proc scanr1(f:proc(a,b:int):int {. closure .},xs:seq[int]):seq[int]=
+  var 
+    que = xs.toDeque()
+    res = initDeque[int]()
+  res.addLast(1)
+  while(que.len>0):
+    var 
+      s = que.popLast()
+      t = f(s,res.peekFirst)
+    res.addFirst(t)
+  return res.toSeq
+
+proc scanr1(f:proc(a,b:float):float {. closure .},start:float,xs:seq[float]):seq[float]=
+  var 
+    que = xs.toDeque()
+    res = initDeque[float]()
+  res.addLast(1.0)
+  while(que.len>0):
+    var 
+      s = que.popLast()
+      t = f(s,res.peekFirst)
+    res.addFirst(t)
+  return res.toSeq
