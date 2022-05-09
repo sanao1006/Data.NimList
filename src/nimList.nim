@@ -1,6 +1,6 @@
 
 
-import  options,strutils,sequtils
+import  options,strutils,sequtils,deques
 
 
 
