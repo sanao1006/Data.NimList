@@ -222,3 +222,32 @@ proc concatMap*[T](xs:seq[seq[T]],f:proc,x:T):seq[T] =
     doAssert @[@[1.0,2.0,3.0],@[4.0,5.0,6.0]].concatMap(floatDiv,2) == @[0.5,1.0,1.5,2.0,2.5,3.0]
   return xs.mapIt(it.mapIt(it.f(x))).concat
 
+proc subsequences(s:string):seq[string]=
+  iterator product[T](s: openArray[T], repeat: Positive): seq[T] =
+    var counters = newSeq[int](repeat)
+    block outer:
+      while true:
+        var result = newSeq[T](repeat)
+        for i, cnt in counters:
+          result[i] = s[cnt]
+        yield result
+        var i = repeat - 1
+        while true:
+          inc counters[i]
+          if counters[i] == s.len:
+            counters[i] = 0
+            dec i
+          else: break
+          if i < 0:break outer
+  result = newSeq[string]()
+  result.add(" ")
+  for i in product(@[0,1],s.len):
+    var tmp = newSeq[char]()
+    for jx,j in i:
+      if(j==1):tmp.add(s[jx])
+    if(tmp.len==0):continue
+    result.add(
+      tmp
+      .mapIt($it)
+      .foldl(a & b)
+    )
