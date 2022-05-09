@@ -347,3 +347,13 @@ proc scanr1(f:proc(a,b:float):float {. closure .},start:float,xs:seq[float]):seq
       t = f(s,res.peekFirst)
     res.addFirst(t)
   return res.toSeq
+
+proc iterate[T](number:int,f:proc(b:T):T{. closure .},start:T):seq[T]=
+  var res = initDeque[T]()
+  res.addLast(start)
+  while(not(res.len ==  number)):
+    var 
+      s = res.peekLast()
+      t = f(s)
+    res.addLast(t)
+  return res.toSeq
