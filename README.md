@@ -4,7 +4,7 @@
 # Whats' this?
 ### This is a Nim implementation of Haskell's Data.List library  
 ※Not completed(In progress)  
-# Introduction of Functions
+# Basic Functions
 
 ## [++](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L7) ([a] -> [a] -> [a])
 Append two lists
@@ -63,4 +63,44 @@ let b: seq[int = @[1,2,3]
 a.null == true
 b.null == false
 "".null == true
+```
+# List transformers
+※map and reverse are omitted.
+## [intersperse](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L122) (a -> [a] -> [a])
+```Nim
+intersperse(1,@[2,3,4,5]) == @[2,1,3,1,4,1,5]
+ intersperse(',', "1234") == "1,2,3,4"
+intersperse(' ', "ABCD") == "A B C D"
+```
+
+## [intercalate](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L136) ([a] -> [[a]] -> [a])
+```Nim
+ intercalate(", ", ["Lorem", "ipsum", "dolor"]) == "Lorem, ipsum, dolor"
+```
+
+## [transepose](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L142) ([[a]] -> [[a]])
+```Nim
+@[@[1,2,3],@[4,5,6]].transpose == @[@[1,4],@[2,5],@[3,6]] 
+@[@['a','b','c'],@['d','e','f']].transpose == @[@['a','d'],@['b','e'],@['c','f']]
+@["123","456"].transpose == @["14","25","36"]
+@["abc","def"].transpose == @["ad","be","cf"]
+```
+
+## [subsequences(not completed)](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L225) ([a] -> [[a]])
+```Nim
+"123".subsequences == @[" ", "3", "2", "23", "1", "13", "12", "123"]
+```
+
+## [permutations](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L173) ([a] -> [[a]])
+```Nim
+@[1,2,3].permutations == @[
+     @[1, 2, 3], @[1, 3, 2],
+     @[2, 1, 3],@[2, 3, 1],
+     @[3, 1, 2], @[3, 2, 1]
+     ]
+"aiu".permutations == @[
+      @['a', 'i', 'u'], @['a', 'u', 'i'], 
+      @['i', 'a', 'u'], @['i', 'u', 'a'], 
+      @['u', 'a', 'i'], @['u', 'i', 'a']
+    ]
 ```
