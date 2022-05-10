@@ -400,3 +400,41 @@ proc takeWhile*[T](f:proc(a:T):bool{. closure .},xs:seq[T]):seq[T] =
   for i in xs:
     if(not(f(i))):break
     if(f(i)):result.add(i)
+
+proc takeWhile*[T](f:proc(a:T):bool{. closure .},xs:string):string =
+  for i in xs:
+    if(not(f(i))):break
+
+proc dropWhile*[T](f:proc(a:T):bool{. closure .},xs:seq[T]):seq[T] =
+  for ix,i in xs:
+    if(not(f(i))):
+      return xs[ix..xs.len-1]
+      break
+  let emptySeq:seq[T] = @[]
+  return emptySeq
+
+proc dropWhile*[T](f:proc(a:T):bool{. closure .},xs:string):string =
+  for ix,i in xs:
+    if(not(f(i))):
+      return xs[ix..xs.len-1]
+      break
+  let emptyString:string = ""
+  return emptyString
+proc gg(a:char):bool=return a < 'b'
+
+proc span[T](f:proc(a:T):bool,xs:seq[T]):(seq[T],seq[T]) =
+  return(takeWhile(f,xs),dropWhile(f,xs))
+    
+proc span[T](f:proc(a:T):bool,xs:string):(string,string) =
+  return((takeWhile(f,xs),dropWhile(f,xs))  )
+
+proc breakList[T](f:proc(a:T):bool,xs:seq[T]):(seq[T],seq[T]) =
+  return span(proc(x:T):bool=
+    if(f(x)):false
+    else:true,xs)
+
+proc breakList[T](f:proc(a:T):bool,xs:string):(string,string) =
+  return span(proc(x:T):bool=
+    if(f(x)):false
+    else:true,xs)
+    if(f(i)):result.add(i)
