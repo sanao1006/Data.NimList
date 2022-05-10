@@ -70,7 +70,7 @@ b.null == false
 ## [intersperse](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L122) (a -> [a] -> [a])
 ```Nim
 intersperse(1,@[2,3,4,5]) == @[2,1,3,1,4,1,5]
- intersperse(',', "1234") == "1,2,3,4"
+intersperse(',', "1234") == "1,2,3,4"
 intersperse(' ', "ABCD") == "A B C D"
 ```
 
@@ -122,24 +122,24 @@ drop(2,"123456") == "3456"
 
 ## [spliatAt](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L417) (Int -> [a] -> ([a],[a]))
 ```Nim
-    splitAt 3 @[1,2,3,4,5] == (@[1,2,3],@[4,5])
-    splitAt 3 @[1,2,3] == (@[1,2,3],@[])
+splitAt(3,@[1,2,3,4,5]) == (@[1,2,3],@[4,5])
+splitAt(3,@[1,2,3]) == (@[1,2,3],@[])
 ```
 
 ## [takeWhile](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L392) ((a -> bool) -> [a] -> [a])
 ```Nim
-    proc g(a:int):bool=return a<4
-    proc f(a:int):bool=return a==3
-    proc h(a:char):bool = return a < 'e'
-    takeWhile(g,@[1,2,3,4,5]) == @[1,2,3]
-    takeWhile(f,@[3,3,3,4]) == @[3,3,3]
-    takeWhile(h,@['a','b','c','d','e','g','h']) == @['a','b','c','d']
+proc g(a:int):bool=return a<4
+proc f(a:int):bool=return a==3
+proc h(a:char):bool = return a < 'e'
+takeWhile(g,@[1,2,3,4,5]) == @[1,2,3]
+takeWhile(f,@[3,3,3,4]) == @[3,3,3]
+takeWhile(h,@['a','b','c','d','e','g','h']) == @['a','b','c','d']
 ```
 
 ## [dropWhile](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L417) ((a -> bool) -> [a] -> [a])
 ```Nim
-    proc g(a:int):bool=return a<3
-    proc f(a:int):bool=return a<9
-    takeWhile(g,@[1,2,3,4,5]) == @[1,2,3]
-    takeWhile(f,@[3,3,3,4]) == @[3,3,3]
+proc g(a:int):bool=return a<3
+proc f(a:int):bool=return a<4
+takeWhile(g,@[1,2,3,4,5]) == @[1,2,3]
+takeWhile(f,@[3,3,3,4]) == @[]
 ```
