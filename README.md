@@ -64,6 +64,7 @@ a.null == true
 b.null == false
 "".null == true
 ```
+
 # List transformers
 ※map and reverse are omitted.
 ## [intersperse](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L122) (a -> [a] -> [a])
@@ -103,4 +104,42 @@ intersperse(' ', "ABCD") == "A B C D"
       @['i', 'a', 'u'], @['i', 'u', 'a'], 
       @['u', 'a', 'i'], @['u', 'i', 'a']
     ]
+```
+
+# Sublists  
+
+## [take](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L361) (a -> [a] -> [a])
+```Nim
+take(3,@[1,2,3,4]) == @[1,2,3]
+take(3,"abcdefg") == "abc"
+```
+
+## [drop](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L375) (a -> [a] -> [a])
+```Nim
+drop(3,@[1,2,3,4,5]) == @[4,5]
+drop(2,"123456") == "3456"
+```
+
+## [spliatAt](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L417) (Int -> [a] -> ([a],[a]))
+```Nim
+    splitAt 3 @[1,2,3,4,5] == (@[1,2,3],@[4,5])
+    splitAt 3 @[1,2,3] == (@[1,2,3],@[])
+```
+
+## [takeWhile](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L392) ((a -> bool) -> [a] -> [a])
+```Nim
+    proc g(a:int):bool=return a<4
+    proc f(a:int):bool=return a==3
+    proc h(a:char):bool = return a < 'e'
+    takeWhile(g,@[1,2,3,4,5]) == @[1,2,3]
+    takeWhile(f,@[3,3,3,4]) == @[3,3,3]
+    takeWhile(h,@['a','b','c','d','e','g','h']) == @['a','b','c','d']
+```
+
+## [dropWhile](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L417) ((a -> bool) -> [a] -> [a])
+```Nim
+    proc g(a:int):bool=return a<3
+    proc f(a:int):bool=return a<9
+    takeWhile(g,@[1,2,3,4,5]) == @[1,2,3]
+    takeWhile(f,@[3,3,3,4]) == @[3,3,3]
 ```

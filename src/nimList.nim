@@ -189,6 +189,7 @@ proc permutations*[T](a: seq[T], n: int = a.len): seq[seq[T]] =
           use[i] = false
   var use = newSeq[bool](a.len)
   perm(a, n, use)
+
 proc permutations*(a:string,n:int=a.len):seq[seq[char]] =
   runnableExamples:
     doAssert "aiu".permutations == @[
@@ -208,6 +209,7 @@ proc permutations*(a:string,n:int=a.len):seq[seq[char]] =
           use[i] = false
   var use = newSeq[bool](a.len)
   perm(a, n, use)
+
 proc concatMap*[T](xs:seq[seq[T]],f:proc,x:T):seq[T] =
   runnableExamples:
     func plus(a,b:int):int=return a+b
@@ -223,6 +225,8 @@ proc concatMap*[T](xs:seq[seq[T]],f:proc,x:T):seq[T] =
   return xs.mapIt(it.mapIt(it.f(x))).concat
 
 proc subsequences*(s:string):seq[string]=
+  runnableExamples:
+    doAssert "123".subsequences == @[" ", "3", "2", "23", "1", "13", "12", "123"]
   iterator product[T](s: openArray[T], repeat: Positive): seq[T] =
     var counters = newSeq[int](repeat)
     block outer:
@@ -253,6 +257,9 @@ proc subsequences*(s:string):seq[string]=
     )
 
 proc scanl*(f:proc(a,b:int):int{. closure .},start:int,xs:seq[int]):seq[int]=
+  runnableExamples:
+    proc f(a,b:int):int=a+b
+    doAssert scanl(f,0,@[1,2,3,4]) == @[0,1,3,6,10]
   var 
     que = xs.toDeque()
     res = initDeque[int]()
@@ -421,7 +428,6 @@ proc dropWhile*[T](f:proc(a:T):bool{. closure .},xs:string):string =
       break
   let emptyString:string = ""
   return emptyString
-proc gg(a:char):bool=return a < 'b'
 
 proc span[T](f:proc(a:T):bool,xs:seq[T]):(seq[T],seq[T]) =
   return(takeWhile(f,xs),dropWhile(f,xs))

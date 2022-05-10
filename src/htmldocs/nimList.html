@@ -120,6 +120,13 @@ window.addEventListener('DOMContentLoaded', main);
     title="drop[T](n: int; xs: seq[T]): seq[T]">drop[T](n: int; xs: seq[T]): seq[T]</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">dropWhile
+      <li><a class="reference" href="#dropWhile%2Cproc%28T%29%2Cseq%5BT%5D"
+    title="dropWhile[T](f: proc (a: T): bool {.closure.}; xs: seq[T]): seq[T]">dropWhile[T](f: proc (a: T): bool {.closure.}; xs: seq[T]): seq[T]</a></li>
+  <li><a class="reference" href="#dropWhile%2Cproc%28T%29%2Cstring"
+    title="dropWhile[T](f: proc (a: T): bool {.closure.}; xs: string): string">dropWhile[T](f: proc (a: T): bool {.closure.}; xs: string): string</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">head
       <li><a class="reference" href="#head%2Cstring"
     title="head(x: string): char">head(x: string): char</a></li>
@@ -235,6 +242,8 @@ window.addEventListener('DOMContentLoaded', main);
   <ul class="simple nested-toc-section">takeWhile
       <li><a class="reference" href="#takeWhile%2Cproc%28T%29%2Cseq%5BT%5D"
     title="takeWhile[T](f: proc (a: T): bool {.closure.}; xs: seq[T]): seq[T]">takeWhile[T](f: proc (a: T): bool {.closure.}; xs: seq[T]): seq[T]</a></li>
+  <li><a class="reference" href="#takeWhile%2Cproc%28T%29%2Cstring"
+    title="takeWhile[T](f: proc (a: T): bool {.closure.}; xs: string): string">takeWhile[T](f: proc (a: T): bool {.closure.}; xs: string): string</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">transpose
@@ -326,6 +335,22 @@ Append two lists
 <p><strong class="examples_text">Example:</strong></p>
 <pre class="listing"><span class="Identifier">doAssert</span> <span class="Identifier">drop</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="DecNumber">5</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="DecNumber">5</span><span class="Punctuation">]</span>
 <span class="Identifier">doAssert</span> <span class="Identifier">drop</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="Punctuation">]</span></pre>
+
+</dd>
+</div>
+<div id="dropWhile,proc(T),seq[T]">
+<dt><pre><span class="Keyword">proc</span> <a href="#dropWhile%2Cproc%28T%29%2Cseq%5BT%5D"><span class="Identifier">dropWhile</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">closure</span>.}<span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span></pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="dropWhile,proc(T),string">
+<dt><pre><span class="Keyword">proc</span> <a href="#dropWhile%2Cproc%28T%29%2Cstring"><span class="Identifier">dropWhile</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">closure</span>.}<span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<dd>
+
+
 
 </dd>
 </div>
@@ -591,6 +616,8 @@ Return the last element of a list
 <dd>
 
 
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">doAssert</span> <span class="StringLit">&quot;123&quot;</span><span class="Operator">.</span><span class="Identifier">subsequences</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="StringLit">&quot; &quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;3&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;2&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;23&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;1&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;13&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;12&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;123&quot;</span><span class="Punctuation">]</span></pre>
 
 </dd>
 </div>
@@ -648,6 +675,14 @@ Return all elements of a list except the first
 <span class="Identifier">doAssert</span> <span class="Identifier">takeWhile</span><span class="Punctuation">(</span><span class="Identifier">g</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="DecNumber">5</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">]</span>
 <span class="Identifier">doAssert</span> <span class="Identifier">takeWhile</span><span class="Punctuation">(</span><span class="Identifier">f</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">]</span>
 <span class="Identifier">doAssert</span> <span class="Identifier">takeWhile</span><span class="Punctuation">(</span><span class="Identifier">h</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="CharLit">'a'</span><span class="Punctuation">,</span><span class="CharLit">'b'</span><span class="Punctuation">,</span><span class="CharLit">'c'</span><span class="Punctuation">,</span><span class="CharLit">'d'</span><span class="Punctuation">,</span><span class="CharLit">'e'</span><span class="Punctuation">,</span><span class="CharLit">'g'</span><span class="Punctuation">,</span><span class="CharLit">'h'</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="CharLit">'a'</span><span class="Punctuation">,</span><span class="CharLit">'b'</span><span class="Punctuation">,</span><span class="CharLit">'c'</span><span class="Punctuation">,</span><span class="CharLit">'d'</span><span class="Punctuation">]</span></pre>
+
+</dd>
+</div>
+<div id="takeWhile,proc(T),string">
+<dt><pre><span class="Keyword">proc</span> <a href="#takeWhile%2Cproc%28T%29%2Cstring"><span class="Identifier">takeWhile</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">closure</span>.}<span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<dd>
+
+
 
 </dd>
 </div>
@@ -709,7 +744,7 @@ Return the first element of a list and the rest
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2022-05-09 10:17:46 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-05-10 10:51:41 UTC</small>
       </div>
     </div>
   </div>
