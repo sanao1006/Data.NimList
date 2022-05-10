@@ -438,3 +438,11 @@ proc breakList[T](f:proc(a:T):bool,xs:string):(string,string) =
   return span(proc(x:T):bool=
     if(f(x)):false
     else:true,xs)
+
+proc stripPrefix[T](s:seq[T],xs:seq[T]):Option[seq[T]] =
+  if(xs[0..<s.len]==s):return some(xs[s.len..<xs.len])
+  else:return none(seq[T])
+
+proc stripPrefix(s:string,xs:string):Option[string] =
+  if(xs[0..<s.len]==s):return some(xs[s.len..<xs.len])
+  else:return none(string)
