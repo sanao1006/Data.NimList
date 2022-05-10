@@ -404,6 +404,7 @@ proc takeWhile*[T](f:proc(a:T):bool{. closure .},xs:seq[T]):seq[T] =
 proc takeWhile*[T](f:proc(a:T):bool{. closure .},xs:string):string =
   for i in xs:
     if(not(f(i))):break
+    if(f(i)):result.add(i)
 
 proc dropWhile*[T](f:proc(a:T):bool{. closure .},xs:seq[T]):seq[T] =
   for ix,i in xs:
@@ -437,4 +438,3 @@ proc breakList[T](f:proc(a:T):bool,xs:string):(string,string) =
   return span(proc(x:T):bool=
     if(f(x)):false
     else:true,xs)
-    if(f(i)):result.add(i)
