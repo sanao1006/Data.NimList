@@ -1,6 +1,6 @@
 
 
-import  options,strutils,sequtils,deques
+import  options,strutils,sequtils,deques,strutils,sugar
 
 
 
@@ -258,8 +258,9 @@ proc subsequences*(s:string):seq[string]=
 
 proc scanl*(f:proc(a,b:int):int{. closure .},start:int,xs:seq[int]):seq[int]=
   runnableExamples:
-    proc f(a,b:int):int=a+b
-    doAssert scanl(f,0,@[1,2,3,4]) == @[0,1,3,6,10]
+    import  sugar
+    doAssert scanl((a,b:int)->int=>a+b,0,@[1,2,3,4]) == @[0,1,3,6,10]
+    doAssert scanl((a,b:int)->int=>a-b,100,@[1,2,3,4]) == @[100,99,97,94,90]
   var 
     que = xs.toDeque()
     res = initDeque[int]()
@@ -275,6 +276,36 @@ proc scanl*(f:proc(a,b:float):float{. closure .},start:float,xs:seq[float]):seq[
   var 
     que = xs.toDeque()
     res = initDeque[float]()
+  res.addLast(start)
+  while(que.len>0):
+    var 
+      s = que.popFirst()
+      t = f(res.peekLast,s)
+    res.addLast(t)
+  return res.toSeq
+
+proc scanl*(f:proc(a,b:string):string{. closure .},start:string,xs:seq[string]):seq[string]=
+  runnableExamples:
+    import sugar
+    doAssert scanl((a,b:string)->string=>b&a,"foo",@["12","34","56"])  == @["foo", "12foo", "3412foo", "563412foo"]
+  var 
+    que = xs.toDeque()
+    res = initDeque[string]()
+  res.addLast(start)
+  while(que.len>0):
+    var 
+      s = que.popFirst()
+      t = f(res.peekLast,s)
+    res.addLast(t)
+  return res.toSeq
+
+proc scanl*(f:proc(a:string,b:char):string{. closure .},start:string,xs:seq[char]):seq[string]=
+  runnableExamples:
+    import sugar
+    doAssert scanl((a:string,b:char)->string=>b&a,"foo",@['a', 'b', 'c', 'd']) == @["foo", "afoo", "bafoo", "cbafoo", "dcbafoo"]
+  var 
+    que = xs.toDeque()
+    res = initDeque[string]()
   res.addLast(start)
   while(que.len>0):
     var 
@@ -308,6 +339,9 @@ proc scanl1*(f:proc(a,b:float):float{. closure .},xs:seq[float]):seq[float]=
   return res.toSeq
 
 proc scanr*(f:proc(a,b:int):int {. closure .},start:int,xs:seq[int]):seq[int]=
+  runnableExamples:
+    import  sugar
+    doAssert scanr((a,b:int)->int=>a-b,100,@[1,2,3,4]) == @[98,-97,99,-96,100]
   var 
     que = xs.toDeque()
     res = initDeque[int]()
@@ -323,6 +357,33 @@ proc scanr*(f:proc(a,b:float):float {. closure .},start:float,xs:seq[float]):seq
   var 
     que = xs.toDeque()
     res = initDeque[float]()
+  res.addLast(start)
+  while(que.len>0):
+    var 
+      s = que.popLast()
+      t = f(s,res.peekFirst)
+    res.addFirst(t)
+  return res.toSeq
+
+proc scanr*(f:proc(a,b:string):string {. closure .},start:string,xs:seq[string]):seq[string]=
+  var 
+    que = xs.toDeque()
+    res = initDeque[string]()
+  res.addLast(start)
+  while(que.len>0):
+    var 
+      s = que.popLast()
+      t = f(s,res.peekFirst)
+    res.addFirst(t)
+  return res.toSeq
+
+proc scanr*(f:proc(a:char,b:string):string {. closure .},start:string,xs:seq[char]):seq[string]=
+  runnableExamples:
+    import  sugar
+    doAssert scanr((a:char,b:string)->string=>a&b,"foo" , @['a', 'b', 'c', 'd']) == @["abcdfoo", "bcdfoo", "cdfoo", "dfoo", "foo"]
+  var 
+    que = xs.toDeque()
+    res = initDeque[string]()
   res.addLast(start)
   while(que.len>0):
     var 
@@ -398,12 +459,11 @@ proc splitAt*(n:Positive,xs:string):(string,string)=
 
 proc takeWhile*[T](f:proc(a:T):bool{. closure .},xs:seq[T]):seq[T] =
   runnableExamples:
+    import sugar
     proc g(a:int):bool=return a<4
-    proc f(a:int):bool=return a==3
-    proc h(a:char):bool = return a < 'e'
     doAssert takeWhile(g,@[1,2,3,4,5]) == @[1,2,3]
-    doAssert takeWhile(f,@[3,3,3,4]) == @[3,3,3]
-    doAssert takeWhile(h,@['a','b','c','d','e','g','h']) == @['a','b','c','d']
+    doAssert takeWhile((x:int)->bool=>x==3,@[3,3,3,4]) == @[3,3,3]
+    doAssert takeWhile((x:string) -> bool => x.len<3,@["12","123","12345"]) == @["12"]
   for i in xs:
     if(not(f(i))):break
     if(f(i)):result.add(i)
@@ -414,10 +474,14 @@ proc takeWhile*[T](f:proc(a:T):bool{. closure .},xs:string):string =
     if(f(i)):result.add(i)
 
 proc dropWhile*[T](f:proc(a:T):bool{. closure .},xs:seq[T]):seq[T] =
+  runnableExamples:
+    import sugar
+    doAssert dropWhile((x:int) -> bool => x<3,@[1,2,3,4,5,1,2,3]) == @[3,4,5,1,2,3]
+    doAssert dropWhile((x:int) -> bool => x<9,@[1,2,3]) == @[]
+    doAssert dropWhile((x:int) -> bool => x<0,@[1,2,3]) == @[1,2,3]
   for ix,i in xs:
     if(not(f(i))):
       return xs[ix..xs.len-1]
-      break
   let emptySeq:seq[T] = @[]
   return emptySeq
 
@@ -425,58 +489,113 @@ proc dropWhile*[T](f:proc(a:T):bool{. closure .},xs:string):string =
   for ix,i in xs:
     if(not(f(i))):
       return xs[ix..xs.len-1]
-      break
   let emptyString:string = ""
   return emptyString
 
-proc span[T](f:proc(a:T):bool,xs:seq[T]):(seq[T],seq[T]) =
+proc span*[T](f:proc(a:T):bool,xs:seq[T]):(seq[T],seq[T]) =
   return(takeWhile(f,xs),dropWhile(f,xs))
     
-proc span[T](f:proc(a:T):bool,xs:string):(string,string) =
+proc span*[T](f:proc(a:T):bool,xs:string):(string,string) =
   return((takeWhile(f,xs),dropWhile(f,xs))  )
 
-proc breakList[T](f:proc(a:T):bool,xs:seq[T]):(seq[T],seq[T]) =
+proc breakList*[T](f:proc(a:T):bool,xs:seq[T]):(seq[T],seq[T]) =
   return span(proc(x:T):bool=
     if(f(x)):false
     else:true,xs)
 
-proc breakList[T](f:proc(a:T):bool,xs:string):(string,string) =
+proc breakList*[T](f:proc(a:T):bool,xs:string):(string,string) =
   return span(proc(x:T):bool=
     if(f(x)):false
     else:true,xs)
 
-proc stripPrefix[T](s:seq[T],xs:seq[T]):Option[seq[T]] =
+proc stripPrefix*[T](s:seq[T],xs:seq[T]):Option[seq[T]] =
   if(xs[0..<s.len]==s):return some(xs[s.len..<xs.len])
   else:return none(seq[T])
 
-proc stripPrefix(s:string,xs:string):Option[string] =
+proc stripPrefix*(s:string,xs:string):Option[string] =
   if(xs[0..<s.len]==s):return some(xs[s.len..<xs.len])
   else:return none(string)
 
-proc inits[T](x:seq[T]):seq[seq[T]] =
+proc inits*[T](x:seq[T]):seq[seq[T]] =
+  runnableExamples:
+    doAssert inits(@[1,2,3]) == @[@[], @[1], @[1, 2], @[1, 2, 3]]
   result = newSeq[seq[T]]()
   let first:seq[T] = @[]
   result.add(first)
   for i in 0..<x.len:
     result.add(x[0..i])
 
-proc inits(x:string):seq[string] =
+proc inits*(x:string):seq[string] =
+  runnableExamples:
+    doAssert inits("abc") == @["","a","ab","abc"]
   result = newSeq[string]()
   let first:string= ""
   result.add(first)
   for i in 0..<x.len:
     result.add(x[0..i])
 
-proc tails[T](x:seq[T]):seq[seq[T]] =
+proc tails*[T](x:seq[T]):seq[seq[T]] =
+  runnableExamples:
+    doAssert tails(@[1,2,3]) == @[@[1, 2, 3], @[2, 3], @[3], @[]]
   result = newSeq[seq[T]]()
   for i in 0..<x.len:
     result.add(x[i..x.len-1])
   let final:seq[T] = @[]
   result.add(final)
 
-proc tails(x:string):seq[string] =
+proc tails*(x:string):seq[string] =
+  runnableExamples:
+    doAssert tails("abc") == @["abc","bc","c",""]
   result = newSeq[string]()
   for i in 0..<x.len:
     result.add(x[i..x.len-1])
   let final:string = ""
   result.add(final)
+
+#TODO implementation of group function
+
+proc isPrefixOf*[T](x:seq[T],y:seq[T]):bool =
+  runnableExamples:
+    doAssert isPrefixOf(@[1,2],@[1,2,3,4]) == true
+    doAssert  isPrefixOf(@[2],@[1,2,3,4]) == false
+  if(x.len>y.len):return false
+  return take(x.len,y) == x
+
+proc isPrefixOf*(x:string,y:string):bool =
+  runnableExamples:
+    doAssert isPrefixOf("Hello","Hello World!") == true
+    doAssert  isPrefixOf("Hello","Wello Horld!") == false
+  if(x.len>y.len):return false
+  return take(x.len,y) == x
+
+proc isSuffixOf*[T](x:seq[T],y:seq[T]):bool =
+  runnableExamples:
+    doAssert isSuffixOf(@[1,2,3],@[1,2,3,4,5,1,2,3]) == true
+  if(x.len>y.len):return false
+  return drop(y.len-x.len,y) == x
+
+proc isSuffixOf*(x:string,y:string):bool =
+  runnableExamples:
+    doAssert isSuffixOf("ld!","Hello World!") == true
+    doAssert isSuffixOf("World","Hello World!") == false
+  if(x.len>y.len):return false
+  return drop(y.len-x.len,y) == x 
+
+proc isInfixOf*(x,y:string):bool=
+  ## Whether y includes x
+  ## That in other words, y is a longer number of characters than x.
+  ## Note that the order of the arguments is reversed from contains in strutils
+  runnableExamples:
+    doAssert isInfixOf("Haskell", "I really like Haskell.") == true
+    doAssert isInfixOf("lal", "I really like Haskell.") == false
+  return contains(y,x)
+
+
+proc isInfixOf*[T](x,y:seq[T]):bool=
+  runnableExamples:
+    doAssert isInfixOf(@[1,2,3],@[4,5,6,1,2,3,4,5]) == true
+    doAssert isInfixOf(@[1,2],@[4,5,6,1,3,2,4,5]) == false
+  var
+    y = y.mapIt($it).join" "
+    x = x.mapIt($it).join" "
+  return contains(y,x)
