@@ -186,7 +186,6 @@ breakList(f, @[1,2,3]) == (@[1,2,3],@[])
 ```
 
 ## [stripPrefix](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L448) ([a] -> [a] -> Option[a])
-"break" is a reserved word, so I named it "breakList"
 ```Nim
 stripPrefix("foo","foobar") == some("bar")
 stripPrefix("foo","barfoo") == none(string)
