@@ -4,6 +4,7 @@
 # Whats' this?
 ### This is a Nim implementation of Haskell's Data.List library  
 ※Not completed(In progress)  
+Currently, the links to the code for each function are misaligned
 # Basic Functions
 
 ## [++](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L7) ([a] -> [a] -> [a])
@@ -64,7 +65,7 @@ a.null == true
 b.null == false
 "".null == true
 ```
-
+  
 # List transformers
 ※map and reverse are omitted.
 ## [intersperse](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L122) (a -> [a] -> [a])
@@ -105,9 +106,32 @@ intersperse(' ', "ABCD") == "A B C D"
       @['u', 'a', 'i'], @['u', 'i', 'a']
     ]
 ```
+  
+# Building lists
+
+## [scanl](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L259) ((b -> a -> b) -> b -> [a] -> [b])
+```Nim
+proc f(a, b:int):int = a + b
+scanl(f,0,@[1,2,3,4]) == @[0,1,3,6,10]
+```
+
+## [scanr](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L310) ((a -> b -> b) -> b -> [a] -> [b])
+```Nim
+proc f(a, b:int): int = a - b
+scanr(f, 100 , @[1..4]) == @[98,-97,99,-96,100]
+```
+
+# Infinite list
+## [iterate](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L358) (Int ->(a -> a) -> a -> [a])
+Since Nim, strict evaluation, cannot express an infinite list, the number of items to be evaluated is determined in advance(By using argument "number").
+```Nim
+proc f(a:int):int == a + 3
+iterate(10, f, 42) == @[42,45,48,51,54,57,60,63,66,69]
+
+```
+  
 
 # Sublists  
-
 ## [take](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L361) (a -> [a] -> [a])
 ```Nim
 take(3,@[1,2,3,4]) == @[1,2,3]
@@ -140,6 +164,30 @@ takeWhile(h,@['a','b','c','d','e','g','h']) == @['a','b','c','d']
 ```Nim
 proc g(a:int):bool=return a<3
 proc f(a:int):bool=return a<4
-takeWhile(g,@[1,2,3,4,5]) == @[1,2,3]
-takeWhile(f,@[3,3,3,4]) == @[]
+dropWhile(g,@[1,2,3,4,5]) == @[4,5]
+dropWhile(f,@[3,3,3,4]) == @[]
+```
+
+## [span](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L432) ((a -> bool) -> [a] -> ([a],[a]))
+```Nim
+proc g(a:int):bool=return a<3
+span(g,[1,2,3,4,1,2,3,4]) == (@[1,2],@[3,4,1,2,3,4])
+proc f(a:int):bool=return a<9
+span(f,[1,2,3]) == (@[1,2,3],@[])
+```
+
+## [breakList](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L438) ((a -> bool) -> [a] -> ([a],[a]))
+"break" is a reserved word, so I named it "breakList"
+```Nim
+proc g(a:int):bool=return a>3
+breakList(g,[1,2,3,4,1,2,3,4] == (@[1,2,3],@[4,1,2,3,4])
+proc f(a:int):bool=return a>9
+breakList(f, @[1,2,3]) == (@[1,2,3],@[])
+```
+
+## [stripPrefix](https://github.com/sanao1006/Data.NimList/blob/59c4d6ce044e3083ce14e8306200169ee00ce71c/src/nimList.nim#L448) ([a] -> [a] -> Option[a])
+"break" is a reserved word, so I named it "breakList"
+```Nim
+stripPrefix("foo","foobar") == some("bar")
+stripPrefix("foo","barfoo") == none(string)
 ```
