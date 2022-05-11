@@ -2,7 +2,9 @@
 [![.github/workflows/main.yml](https://github.com/sanao1006/Data.NimList/actions/workflows/main.yml/badge.svg)](https://github.com/sanao1006/Data.NimList/actions/workflows/main.yml)  
 
 # Whats' this?
-### This is a Nim implementation of Haskell's Data.List library  
+### This is a Nim implementation of Haskell's Data.List library 　
+### I avoid using recursion too often, and I actively use the standard library. Therefore, some functions have unique implementations.  
+### Please point out any mistakes!
 ※Not completed(In progress)  
 Currently, the links to the code for each function are misaligned
 # Basic Functions
