@@ -493,26 +493,49 @@ proc dropWhile*[T](f:proc(a:T):bool{. closure .},xs:string):string =
   return emptyString
 
 proc span*[T](f:proc(a:T):bool,xs:seq[T]):(seq[T],seq[T]) =
+  runnableExamples:
+    import sugar
+    doAssert span((x:int)->bool=>x<3 ,@[1,2,3,4,1,2,3,4]) == (@[1, 2], @[3, 4, 1, 2, 3, 4])
+    doAssert span((x:int)->bool=>x<9 ,@[1,2,3]) == (@[1, 2, 3], @[])
+    doAssert span((x:int)->bool=>x<0 ,@[1,2,3]) == (@[], @[1, 2, 3])
   return(takeWhile(f,xs),dropWhile(f,xs))
     
 proc span*[T](f:proc(a:T):bool,xs:string):(string,string) =
+  runnableExamples:
+    import sugar
+    doAssert  span((x:char)->bool=>x<'d' ,"abcdefg") == ("abc", "defg")
   return((takeWhile(f,xs),dropWhile(f,xs))  )
 
 proc breakList*[T](f:proc(a:T):bool,xs:seq[T]):(seq[T],seq[T]) =
+  runnableExamples:
+    import sugar
+    doAssert breakList((x:int)->bool=>x<3 ,@[1,2,3,4,1,2,3,4]) == (@[], @[1, 2, 3, 4, 1, 2, 3, 4])
+    doAssert breakList((x:int)->bool=>x<0 ,@[1,2,3]) == (@[1, 2, 3], @[])
   return span(proc(x:T):bool=
     if(f(x)):false
     else:true,xs)
 
 proc breakList*[T](f:proc(a:T):bool,xs:string):(string,string) =
+  runnableExamples:
+    import sugar
+    doAssert breakList((x:char)->bool=>x>'d' ,"abcdefg") == ("abcd", "efg")
   return span(proc(x:T):bool=
     if(f(x)):false
     else:true,xs)
 
 proc stripPrefix*[T](s:seq[T],xs:seq[T]):Option[seq[T]] =
+  runnableExamples:
+    import options
+    doAssert stripPrefix(@[1,2],@[1,2,3,4,5]) == some(@[3,4,5])
+    doAssert stripPrefix(@[1,2],@[3,4,5]) == none(seq[int])
   if(xs[0..<s.len]==s):return some(xs[s.len..<xs.len])
   else:return none(seq[T])
 
 proc stripPrefix*(s:string,xs:string):Option[string] =
+  runnableExamples:
+    import options
+    doAssert stripPrefix("foo","foobar") == some("bar")
+    doAssert stripPrefix("foo","barfoo") == none(string)
   if(xs[0..<s.len]==s):return some(xs[s.len..<xs.len])
   else:return none(string)
 

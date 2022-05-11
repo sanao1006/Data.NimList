@@ -374,6 +374,10 @@ Append two lists
 <dd>
 
 
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">sugar</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">breakList</span><span class="Punctuation">(</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span><span class="Identifier">int</span><span class="Punctuation">)</span><span class="Operator">-&gt;</span><span class="Identifier">bool</span><span class="Operator">=&gt;</span><span class="Identifier">x</span><span class="Operator">&lt;</span><span class="DecNumber">3</span> <span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="Punctuation">]</span><span class="Punctuation">,</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">2</span><span class="Punctuation">,</span> <span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="DecNumber">4</span><span class="Punctuation">,</span> <span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">2</span><span class="Punctuation">,</span> <span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="DecNumber">4</span><span class="Punctuation">]</span><span class="Punctuation">)</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">breakList</span><span class="Punctuation">(</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span><span class="Identifier">int</span><span class="Punctuation">)</span><span class="Operator">-&gt;</span><span class="Identifier">bool</span><span class="Operator">=&gt;</span><span class="Identifier">x</span><span class="Operator">&lt;</span><span class="DecNumber">0</span> <span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">2</span><span class="Punctuation">,</span> <span class="DecNumber">3</span><span class="Punctuation">]</span><span class="Punctuation">,</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="Punctuation">]</span><span class="Punctuation">)</span></pre>
 
 </dd>
 </div>
@@ -382,6 +386,9 @@ Append two lists
 <dd>
 
 
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">sugar</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">breakList</span><span class="Punctuation">(</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span><span class="Identifier">char</span><span class="Punctuation">)</span><span class="Operator">-&gt;</span><span class="Identifier">bool</span><span class="Operator">=&gt;</span><span class="Identifier">x</span><span class="Operator">&gt;</span><span class="CharLit">'d'</span> <span class="Punctuation">,</span><span class="StringLit">&quot;abcdefg&quot;</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Punctuation">(</span><span class="StringLit">&quot;abcd&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;efg&quot;</span><span class="Punctuation">)</span></pre>
 
 </dd>
 </div>
@@ -825,6 +832,11 @@ Return the last element of a list
 <dd>
 
 
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">sugar</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">span</span><span class="Punctuation">(</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span><span class="Identifier">int</span><span class="Punctuation">)</span><span class="Operator">-&gt;</span><span class="Identifier">bool</span><span class="Operator">=&gt;</span><span class="Identifier">x</span><span class="Operator">&lt;</span><span class="DecNumber">3</span> <span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">2</span><span class="Punctuation">]</span><span class="Punctuation">,</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="DecNumber">4</span><span class="Punctuation">,</span> <span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">2</span><span class="Punctuation">,</span> <span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="DecNumber">4</span><span class="Punctuation">]</span><span class="Punctuation">)</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">span</span><span class="Punctuation">(</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span><span class="Identifier">int</span><span class="Punctuation">)</span><span class="Operator">-&gt;</span><span class="Identifier">bool</span><span class="Operator">=&gt;</span><span class="Identifier">x</span><span class="Operator">&lt;</span><span class="DecNumber">9</span> <span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">2</span><span class="Punctuation">,</span> <span class="DecNumber">3</span><span class="Punctuation">]</span><span class="Punctuation">,</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="Punctuation">]</span><span class="Punctuation">)</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">span</span><span class="Punctuation">(</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span><span class="Identifier">int</span><span class="Punctuation">)</span><span class="Operator">-&gt;</span><span class="Identifier">bool</span><span class="Operator">=&gt;</span><span class="Identifier">x</span><span class="Operator">&lt;</span><span class="DecNumber">0</span> <span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="Punctuation">]</span><span class="Punctuation">,</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">2</span><span class="Punctuation">,</span> <span class="DecNumber">3</span><span class="Punctuation">]</span><span class="Punctuation">)</span></pre>
 
 </dd>
 </div>
@@ -833,6 +845,9 @@ Return the last element of a list
 <dd>
 
 
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">sugar</span>
+<span class="Identifier">doAssert</span>  <span class="Identifier">span</span><span class="Punctuation">(</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span><span class="Identifier">char</span><span class="Punctuation">)</span><span class="Operator">-&gt;</span><span class="Identifier">bool</span><span class="Operator">=&gt;</span><span class="Identifier">x</span><span class="Operator">&lt;</span><span class="CharLit">'d'</span> <span class="Punctuation">,</span><span class="StringLit">&quot;abcdefg&quot;</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Punctuation">(</span><span class="StringLit">&quot;abc&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;defg&quot;</span><span class="Punctuation">)</span></pre>
 
 </dd>
 </div>
@@ -862,6 +877,10 @@ Return the last element of a list
 <dd>
 
 
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">options</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">stripPrefix</span><span class="Punctuation">(</span><span class="StringLit">&quot;foo&quot;</span><span class="Punctuation">,</span><span class="StringLit">&quot;foobar&quot;</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Identifier">some</span><span class="Punctuation">(</span><span class="StringLit">&quot;bar&quot;</span><span class="Punctuation">)</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">stripPrefix</span><span class="Punctuation">(</span><span class="StringLit">&quot;foo&quot;</span><span class="Punctuation">,</span><span class="StringLit">&quot;barfoo&quot;</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Identifier">none</span><span class="Punctuation">(</span><span class="Identifier">string</span><span class="Punctuation">)</span></pre>
 
 </dd>
 </div>
@@ -870,6 +889,10 @@ Return the last element of a list
 <dd>
 
 
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">options</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">stripPrefix</span><span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">]</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="DecNumber">5</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Identifier">some</span><span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="DecNumber">5</span><span class="Punctuation">]</span><span class="Punctuation">)</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">stripPrefix</span><span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">]</span><span class="Punctuation">,</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="DecNumber">5</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Identifier">none</span><span class="Punctuation">(</span><span class="Identifier">seq</span><span class="Punctuation">[</span><span class="Identifier">int</span><span class="Punctuation">]</span><span class="Punctuation">)</span></pre>
 
 </dd>
 </div>
@@ -1025,7 +1048,7 @@ Return the first element of a list and the rest
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2022-05-11 11:52:42 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-05-11 12:17:47 UTC</small>
       </div>
     </div>
   </div>
