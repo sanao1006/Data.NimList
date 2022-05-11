@@ -452,3 +452,31 @@ proc stripPrefix[T](s:seq[T],xs:seq[T]):Option[seq[T]] =
 proc stripPrefix(s:string,xs:string):Option[string] =
   if(xs[0..<s.len]==s):return some(xs[s.len..<xs.len])
   else:return none(string)
+
+proc inits[T](x:seq[T]):seq[seq[T]] =
+  result = newSeq[seq[T]]()
+  let first:seq[T] = @[]
+  result.add(first)
+  for i in 0..<x.len:
+    result.add(x[0..i])
+
+proc inits(x:string):seq[string] =
+  result = newSeq[string]()
+  let first:string= ""
+  result.add(first)
+  for i in 0..<x.len:
+    result.add(x[0..i])
+
+proc tails[T](x:seq[T]):seq[seq[T]] =
+  result = newSeq[seq[T]]()
+  for i in 0..<x.len:
+    result.add(x[i..x.len-1])
+  let final:seq[T] = @[]
+  result.add(final)
+
+proc tails(x:string):seq[string] =
+  result = newSeq[string]()
+  for i in 0..<x.len:
+    result.add(x[i..x.len-1])
+  let final:string = ""
+  result.add(final)
