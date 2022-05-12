@@ -393,24 +393,24 @@ proc scanr*(f:proc(a:char,b:string):string {. closure .},start:string,xs:seq[cha
   return res.toSeq
 
 proc scanr1*(f:proc(a,b:int):int {. closure .},xs:seq[int]):seq[int]=
-  var 
+  var
     que = xs.toDeque()
     res = initDeque[int]()
   res.addLast(1)
   while(que.len>0):
-    var 
+    var
       s = que.popLast()
       t = f(s,res.peekFirst)
     res.addFirst(t)
   return res.toSeq
 
 proc scanr1*(f:proc(a,b:float):float {. closure .},start:float,xs:seq[float]):seq[float]=
-  var 
+  var
     que = xs.toDeque()
     res = initDeque[float]()
   res.addLast(1.0)
   while(que.len>0):
-    var 
+    var
       s = que.popLast()
       t = f(s,res.peekFirst)
     res.addFirst(t)
@@ -420,13 +420,50 @@ proc iterate*[T](number:int,f:proc(b:T):T{. closure .},start:T):seq[T]=
   var res = initDeque[T]()
   res.addLast(start)
   while(not(res.len ==  number)):
-    var 
+    var
       s = res.peekLast()
       t = f(s)
     res.addLast(t)
   return res.toSeq
 
-proc take*[T](n:int,xs:seq[T]):seq[T] = 
+iterator iterate[S,U](f:proc(a:S):U,x:S):U=
+  var
+    a:seq[S] = @[x]
+    counter:int = 0
+  while true:
+    if(counter==0):yield a[0]
+    else:
+      a.add(f(a.last))
+      yield a[counter]
+    inc counter
+
+iterator repeatList[T](x:seq[T]):seq[T]=
+  while true : yield x
+
+iterator repeatList[T](x:T):T=
+  while true : yield x
+
+proc replicate[T](a:int,b:T):seq[T]=
+  for i in 0..<a:result.add(b)
+
+proc replicate[T](a:int,b:seq[T]):seq[seq[T]]=
+  for i in 0..<a:result.add(b)
+
+iterator cycle[T](x:seq[T]):T=
+  var counter:int = 0
+  while true:
+    if(counter==x.len):counter -= x.len
+    yield x[counter]
+    inc counter
+
+iterator cycle(x:string):char=
+  var counter:int = 0
+  while true:
+    if(counter==x.len):counter -= x.len
+    yield x[counter]
+    inc counter
+
+proc take*[T](n:int,xs:seq[T]):seq[T] =
   runnableExamples:
     doAssert take(3,@[1,2,3,4]) == @[1,2,3]
     doAssert take(3,@[1.1,2.2,3.3,4.4]) == @[1.1,2.2,3.3]
@@ -622,3 +659,51 @@ proc isInfixOf*[T](x,y:seq[T]):bool=
     y = y.mapIt($it).join" "
     x = x.mapIt($it).join" "
   return contains(y,x)
+
+proc elem[T](x:T,y:seq[T]):bool=
+  var
+    arr = y.sorted()
+    left = -1
+    right = y.len
+  while(left+1 < right):
+    var mid = (left + right) div 2
+    if(arr[mid]>=x):right=mid
+    else:left=mid
+  if(left == -1 or right>=arr.len):return false
+  arr[right]==x
+
+proc elem(x:char,y:string):bool=
+  var
+    arr = y.sorted()
+    left = -1
+    right = y.len
+  while(left+1 < right):
+    var mid = (left + right) div 2
+    if(arr[mid]>=x):right=mid
+    else:left=mid
+  if(left == -1 or right>=arr.len):return false
+  arr[right]==x
+
+proc notElem[T](x:T,y:seq[T]):bool=
+  var 
+    arr = y.sorted()
+    left = -1
+    right = y.len
+  while(left+1 < right):
+    var mid = (left + right) div 2
+    if(arr[mid]>=x):right=mid
+    else:left=mid
+  if(left == -1 or right>=arr.len):return true
+  arr[right]!=x
+
+proc notElem(x:char,y:string):bool=
+  var 
+    arr = y.sorted()
+    left = -1
+    right = y.len
+  while(left+1 < right):
+    var mid = (left + right) div 2
+    if(arr[mid]>=x):right=mid
+    else:left=mid
+  if(left == -1 or right>=arr.len):return true
+  return arr[right]!=x
