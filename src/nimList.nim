@@ -1,8 +1,61 @@
+import  options,strutils,sequtils,deques,strutils,sugar,algorithm,tables
 
-
-import  options,strutils,sequtils,deques,strutils,sugar,algorithm
-
-
+## 
+## 
+## *******************
+## Data.NimList
+## *******************
+## 
+## =====================
+## Supported functions
+## =====================
+## * **Basic Functions**
+##   * ++
+##   * head
+##   * last
+##   * tail
+##   * init
+##   * uncons
+##   * singleton
+##   * null
+## * **List transformers**
+##   * intersperse
+##   * intercalate
+##   * transepose
+##   * subsequences
+##   * permutations
+## * **Building list**
+##   * scanl
+##   * scanl1
+##   * scanr
+##   * scanr1
+## * **Infinite list**
+##   * iterate
+##   * repeat
+##   * replicate
+##   * cycle
+## * **Sublists**
+##   * take
+##   * drop
+##   * splitAt
+##   * takeWhile
+##   * dropWhile
+##   * span
+##   * breakList
+##   * stripPrefix
+##   * inits
+##   * tails
+## * **Predicates**
+##   * isPrefixOf
+##   * isSuffixOf
+##   * isInfixOf
+## * **Searching lists**
+##   * elem
+##   * notElem
+##   * lookup
+## * **Searching with a predicate**
+##   * find
+##   * partition
 
 proc `++`*[T](x:seq[T],y:seq[T]):seq[T] = 
   ## Append two lists
@@ -256,6 +309,9 @@ proc subsequences*(s:string):seq[string]=
       .foldl(a & b)
     )
 
+## Building lists
+## -----------------
+## 
 proc scanl*(f:proc(a,b:int):int{. closure .},start:int,xs:seq[int]):seq[int]=
   runnableExamples:
     import  sugar
@@ -463,6 +519,7 @@ iterator cycle(x:string):char=
     yield x[counter]
     inc counter
 
+
 proc take*[T](n:int,xs:seq[T]):seq[T] =
   runnableExamples:
     doAssert take(3,@[1,2,3,4]) == @[1,2,3]
@@ -650,7 +707,6 @@ proc isInfixOf*(x,y:string):bool=
     doAssert isInfixOf("lal", "I really like Haskell.") == false
   return contains(y,x)
 
-
 proc isInfixOf*[T](x,y:seq[T]):bool=
   runnableExamples:
     doAssert isInfixOf(@[1,2,3],@[4,5,6,1,2,3,4,5]) == true
@@ -660,7 +716,7 @@ proc isInfixOf*[T](x,y:seq[T]):bool=
     x = x.mapIt($it).join" "
   return contains(y,x)
 
-proc elem[T](x:T,y:seq[T]):bool=
+proc elem*[T](x:T,y:seq[T]):bool=
   var
     arr = y.sorted()
     left = -1
@@ -669,10 +725,10 @@ proc elem[T](x:T,y:seq[T]):bool=
     var mid = (left + right) div 2
     if(arr[mid]>=x):right=mid
     else:left=mid
-  if(left == -1 or right>=arr.len):return false
+  if(right>=arr.len):return false
   arr[right]==x
 
-proc elem(x:char,y:string):bool=
+proc elem*(x:char,y:string):bool=
   var
     arr = y.sorted()
     left = -1
@@ -681,10 +737,10 @@ proc elem(x:char,y:string):bool=
     var mid = (left + right) div 2
     if(arr[mid]>=x):right=mid
     else:left=mid
-  if(left == -1 or right>=arr.len):return false
+  if(right>=arr.len):return false
   arr[right]==x
 
-proc notElem[T](x:T,y:seq[T]):bool=
+proc notElem*[T](x:T,y:seq[T]):bool=
   var 
     arr = y.sorted()
     left = -1
@@ -693,10 +749,10 @@ proc notElem[T](x:T,y:seq[T]):bool=
     var mid = (left + right) div 2
     if(arr[mid]>=x):right=mid
     else:left=mid
-  if(left == -1 or right>=arr.len):return true
+  if(right>=arr.len):return true
   arr[right]!=x
 
-proc notElem(x:char,y:string):bool=
+proc notElem*(x:char,y:string):bool=
   var 
     arr = y.sorted()
     left = -1
@@ -705,5 +761,42 @@ proc notElem(x:char,y:string):bool=
     var mid = (left + right) div 2
     if(arr[mid]>=x):right=mid
     else:left=mid
-  if(left == -1 or right>=arr.len):return true
+  if(right>=arr.len):return true
   return arr[right]!=x
+
+proc lookup*[S, T](x:T, y:seq[(T,S)]):Option[S] =
+  var
+    a = y.mapIt(it[0]).sorted()
+    table = y.toOrderedTable()
+    left = -1
+    right = a.len
+  while(left+1<right):
+    var mid = (right + left) div 2
+    if(a[mid] >= x):right = mid
+    else:left = mid
+  if(right>=a.len):return none(S)
+  return some(table[a[right]])
+
+
+proc findList*[T,S](f:proc(x:S):bool{. closure .},x:seq[T]):Option[T]=
+  runnableExamples:
+    import  sugar,options,sequtils
+    doAssert findList((x:int) -> bool => x>6,(1..7).toSeq) == some(7)
+    doAssert findList((x:int) -> bool => x>12,(1..7).toSeq) == none(int)
+  let res:seq[T] = filter(x,f)
+  if(res.null):return none(T)
+  else:return some(res[0])
+
+proc partition*[S,T](f:proc(x:S):bool{. closure .}, x:seq[T]):(seq[T],seq[T])=
+  runnableExamples:
+    import  sugar,sequtils
+    doAssert partition((x:int)->bool=>x mod 2==0 ,(0..10).toSeq) == (@[0, 2, 4, 6, 8, 10], @[1, 3, 5, 7, 9])
+  var
+    resFst:seq[T] = filter(x,f)
+    resSnd:seq[T] = filter(x,
+    proc(y:S):bool=
+      if(f(y)):false 
+      else:true
+    )
+  return (resFst,resSnd)
+

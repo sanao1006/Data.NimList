@@ -32,6 +32,9 @@ Please point out any mistakes!
   * scanr1
 * __(In)finite list__
   * iterate
+  * repeat
+  * replicate
+  * cycle
 * __Sublists__
   * take
   * drop
@@ -47,5 +50,11 @@ Please point out any mistakes!
   * isPrefixOf
   * isSuffixOf
   * isInfixOf
-
+* __Searching lists__
+   * elem
+   * notElem
+   * lookup
+ * __Searching with a predicate__
+   * find
+   * partition
 ...coming soon

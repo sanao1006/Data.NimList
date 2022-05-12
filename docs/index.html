@@ -17,7 +17,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>src/nimList</title>
+<title>Data.NimList</title>
 <link rel="stylesheet" type="text/css" href="nimdoc.out.css">
 
 <script type="text/javascript" src="dochack.js"></script>
@@ -69,7 +69,7 @@ window.addEventListener('DOMContentLoaded', main);
 <body>
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">src/nimList</h1>
+    <h1 class="title">Data.NimList</h1><h2 class="subtitle">Supported functions</h2>
     <div class="row">
   <div class="three columns">
   <div class="theme-switch-wrapper">
@@ -98,6 +98,7 @@ window.addEventListener('DOMContentLoaded', main);
     </select>
   </div>
   <ul class="simple simple-toc" id="toc-list">
+<li><a class="reference" id="building-lists_toc" href="#building-lists">Building lists</a></li>
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
@@ -132,6 +133,18 @@ window.addEventListener('DOMContentLoaded', main);
     title="dropWhile[T](f: proc (a: T): bool {.closure.}; xs: seq[T]): seq[T]">dropWhile[T](f: proc (a: T): bool {.closure.}; xs: seq[T]): seq[T]</a></li>
   <li><a class="reference" href="#dropWhile%2Cproc%28T%29%2Cstring"
     title="dropWhile[T](f: proc (a: T): bool {.closure.}; xs: string): string">dropWhile[T](f: proc (a: T): bool {.closure.}; xs: string): string</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">elem
+      <li><a class="reference" href="#elem%2Cchar%2Cstring"
+    title="elem(x: char; y: string): bool">elem(x: char; y: string): bool</a></li>
+  <li><a class="reference" href="#elem%2CT%2Cseq%5BT%5D"
+    title="elem[T](x: T; y: seq[T]): bool">elem[T](x: T; y: seq[T]): bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">findList
+      <li><a class="reference" href="#findList%2Cproc%28S%29%2Cseq%5BT%5D"
+    title="findList[T, S](f: proc (x: S): bool {.closure.}; x: seq[T]): Option[T]">findList[T, S](f: proc (x: S): bool {.closure.}; x: seq[T]): Option[T]</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">head
@@ -195,11 +208,28 @@ window.addEventListener('DOMContentLoaded', main);
     title="last[T](x: seq[T]): T">last[T](x: seq[T]): T</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">lookup
+      <li><a class="reference" href="#lookup%2CT%2Cseq%5B%5D"
+    title="lookup[S, T](x: T; y: seq[(T, S)]): Option[S]">lookup[S, T](x: T; y: seq[(T, S)]): Option[S]</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">notElem
+      <li><a class="reference" href="#notElem%2Cchar%2Cstring"
+    title="notElem(x: char; y: string): bool">notElem(x: char; y: string): bool</a></li>
+  <li><a class="reference" href="#notElem%2CT%2Cseq%5BT%5D"
+    title="notElem[T](x: T; y: seq[T]): bool">notElem[T](x: T; y: seq[T]): bool</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">null
       <li><a class="reference" href="#null%2Cstring"
     title="null(x: string): bool">null(x: string): bool</a></li>
   <li><a class="reference" href="#null%2Cseq%5BT%5D"
     title="null[T](x: seq[T]): bool">null[T](x: seq[T]): bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">partition
+      <li><a class="reference" href="#partition%2Cproc%28S%29%2Cseq%5BT%5D"
+    title="partition[S, T](f: proc (x: S): bool {.closure.}; x: seq[T]): (seq[T], seq[T])">partition[S, T](f: proc (x: S): bool {.closure.}; x: seq[T]): (seq[T], seq[T])</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">permutations
@@ -343,7 +373,64 @@ window.addEventListener('DOMContentLoaded', main);
   <div class="nine columns" id="content">
   <div id="tocRoot"></div>
   
-  <p class="module-desc"></p>
+  <p class="module-desc"><ul class="simple"><li><strong>Basic Functions</strong><ul class="simple"><li>++</li>
+<li>head</li>
+<li>last</li>
+<li>tail</li>
+<li>init</li>
+<li>uncons</li>
+<li>singleton</li>
+<li>null</li>
+</ul>
+</li>
+<li><strong>List transformers</strong><ul class="simple"><li>intersperse</li>
+<li>intercalate</li>
+<li>transepose</li>
+<li>subsequences</li>
+<li>permutations</li>
+</ul>
+</li>
+<li><strong>Building list</strong><ul class="simple"><li>scanl</li>
+<li>scanl1</li>
+<li>scanr</li>
+<li>scanr1</li>
+</ul>
+</li>
+<li><strong>Infinite list</strong><ul class="simple"><li>iterate</li>
+<li>repeat</li>
+<li>replicate</li>
+<li>cycle</li>
+</ul>
+</li>
+<li><strong>Sublists</strong><ul class="simple"><li>take</li>
+<li>drop</li>
+<li>splitAt</li>
+<li>takeWhile</li>
+<li>dropWhile</li>
+<li>span</li>
+<li>breakList</li>
+<li>stripPrefix</li>
+<li>inits</li>
+<li>tails</li>
+</ul>
+</li>
+<li><strong>Predicates</strong><ul class="simple"><li>isPrefixOf</li>
+<li>isSuffixOf</li>
+<li>isInfixOf</li>
+</ul>
+</li>
+<li><strong>Searching lists</strong><ul class="simple"><li>elem</li>
+<li>notElem</li>
+<li>lookup</li>
+</ul>
+</li>
+<li><strong>Searching with a predicate</strong><ul class="simple"><li>find</li>
+<li>partition</li>
+</ul>
+</li>
+</ul>
+
+<h1><a class="toc-backref" id="building-lists" href="#building-lists">Building lists</a></h1></p>
   <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
@@ -451,6 +538,34 @@ Append two lists
 <dd>
 
 
+
+</dd>
+</div>
+<div id="elem,char,string">
+<dt><pre><span class="Keyword">proc</span> <a href="#elem%2Cchar%2Cstring"><span class="Identifier">elem</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">char</span><span class="Other">;</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="elem,T,seq[T]">
+<dt><pre><span class="Keyword">proc</span> <a href="#elem%2CT%2Cseq%5BT%5D"><span class="Identifier">elem</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="findList,proc(S),seq[T]">
+<dt><pre><span class="Keyword">proc</span> <a href="#findList%2Cproc%28S%29%2Cseq%5BT%5D"><span class="Identifier">findList</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">S</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">closure</span>.}<span class="Other">;</span> <span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span></pre></dt>
+<dd>
+
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">import</span>  <span class="Identifier">sugar</span><span class="Punctuation">,</span><span class="Identifier">options</span><span class="Punctuation">,</span><span class="Identifier">sequtils</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">findList</span><span class="Punctuation">(</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span><span class="Identifier">int</span><span class="Punctuation">)</span> <span class="Operator">-&gt;</span> <span class="Identifier">bool</span> <span class="Operator">=&gt;</span> <span class="Identifier">x</span><span class="Operator">&gt;</span><span class="DecNumber">6</span><span class="Punctuation">,</span><span class="Punctuation">(</span><span class="FloatNumber">1.</span><span class="Operator">.</span><span class="DecNumber">7</span><span class="Punctuation">)</span><span class="Operator">.</span><span class="Identifier">toSeq</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Identifier">some</span><span class="Punctuation">(</span><span class="DecNumber">7</span><span class="Punctuation">)</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">findList</span><span class="Punctuation">(</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span><span class="Identifier">int</span><span class="Punctuation">)</span> <span class="Operator">-&gt;</span> <span class="Identifier">bool</span> <span class="Operator">=&gt;</span> <span class="Identifier">x</span><span class="Operator">&gt;</span><span class="DecNumber">12</span><span class="Punctuation">,</span><span class="Punctuation">(</span><span class="FloatNumber">1.</span><span class="Operator">.</span><span class="DecNumber">7</span><span class="Punctuation">)</span><span class="Operator">.</span><span class="Identifier">toSeq</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Identifier">none</span><span class="Punctuation">(</span><span class="Identifier">int</span><span class="Punctuation">)</span></pre>
 
 </dd>
 </div>
@@ -635,6 +750,30 @@ Return the last element of a list
 
 </dd>
 </div>
+<div id="lookup,T,seq[]">
+<dt><pre><span class="Keyword">proc</span> <a href="#lookup%2CT%2Cseq%5B%5D"><span class="Identifier">lookup</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">,</span> <span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Other">(</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">S</span><span class="Other">)</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="notElem,char,string">
+<dt><pre><span class="Keyword">proc</span> <a href="#notElem%2Cchar%2Cstring"><span class="Identifier">notElem</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">char</span><span class="Other">;</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="notElem,T,seq[T]">
+<dt><pre><span class="Keyword">proc</span> <a href="#notElem%2CT%2Cseq%5BT%5D"><span class="Identifier">notElem</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">;</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
 <div id="null,string">
 <dt><pre><span class="Keyword">proc</span> <a href="#null%2Cstring"><span class="Identifier">null</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
@@ -658,6 +797,18 @@ Return the last element of a list
 <span class="Identifier">doAssert</span> <span class="Keyword">not</span><span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="DecNumber">2</span><span class="Punctuation">,</span><span class="DecNumber">3</span><span class="Punctuation">]</span><span class="Operator">.</span><span class="Identifier">null</span><span class="Punctuation">)</span>
 <span class="Identifier">doAssert</span> <span class="Identifier">a</span><span class="Operator">.</span><span class="Identifier">null</span>
 <span class="Identifier">doAssert</span> <span class="StringLit">&quot;&quot;</span><span class="Operator">.</span><span class="Identifier">null</span></pre>
+
+</dd>
+</div>
+<div id="partition,proc(S),seq[T]">
+<dt><pre><span class="Keyword">proc</span> <a href="#partition%2Cproc%28S%29%2Cseq%5BT%5D"><span class="Identifier">partition</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">,</span> <span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">S</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">closure</span>.}<span class="Other">;</span> <span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Other">(</span><span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span></pre></dt>
+<dd>
+
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">import</span>  <span class="Identifier">sugar</span><span class="Punctuation">,</span><span class="Identifier">sequtils</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">partition</span><span class="Punctuation">(</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span><span class="Identifier">int</span><span class="Punctuation">)</span><span class="Operator">-&gt;</span><span class="Identifier">bool</span><span class="Operator">=&gt;</span><span class="Identifier">x</span> <span class="Keyword">mod</span> <span class="DecNumber">2</span><span class="Operator">==</span><span class="DecNumber">0</span> <span class="Punctuation">,</span><span class="Punctuation">(</span><span class="FloatNumber">0.</span><span class="Operator">.</span><span class="DecNumber">10</span><span class="Punctuation">)</span><span class="Operator">.</span><span class="Identifier">toSeq</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Punctuation">(</span><span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">0</span><span class="Punctuation">,</span> <span class="DecNumber">2</span><span class="Punctuation">,</span> <span class="DecNumber">4</span><span class="Punctuation">,</span> <span class="DecNumber">6</span><span class="Punctuation">,</span> <span class="DecNumber">8</span><span class="Punctuation">,</span> <span class="DecNumber">10</span><span class="Punctuation">]</span><span class="Punctuation">,</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="DecNumber">5</span><span class="Punctuation">,</span> <span class="DecNumber">7</span><span class="Punctuation">,</span> <span class="DecNumber">9</span><span class="Punctuation">]</span><span class="Punctuation">)</span></pre>
 
 </dd>
 </div>
@@ -1048,7 +1199,7 @@ Return the first element of a list and the rest
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2022-05-11 12:17:47 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-05-12 12:07:14 UTC</small>
       </div>
     </div>
   </div>
