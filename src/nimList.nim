@@ -309,9 +309,6 @@ proc subsequences*(s:string):seq[string]=
       .foldl(a & b)
     )
 
-## Building lists
-## -----------------
-## 
 proc scanl*(f:proc(a,b:int):int{. closure .},start:int,xs:seq[int]):seq[int]=
   runnableExamples:
     import  sugar
@@ -482,7 +479,7 @@ proc iterate*[T](number:int,f:proc(b:T):T{. closure .},start:T):seq[T]=
     res.addLast(t)
   return res.toSeq
 
-iterator iterate[S,U](f:proc(a:S):U,x:S):U=
+iterator iterate*[S,U](f:proc(a:S):U,x:S):U=
   var
     a:seq[S] = @[x]
     counter:int = 0
@@ -493,26 +490,26 @@ iterator iterate[S,U](f:proc(a:S):U,x:S):U=
       yield a[counter]
     inc counter
 
-iterator repeatList[T](x:seq[T]):seq[T]=
+iterator repeatList*[T](x:seq[T]):seq[T]=
   while true : yield x
 
-iterator repeatList[T](x:T):T=
+iterator repeatList*[T](x:T):T=
   while true : yield x
 
-proc replicate[T](a:int,b:T):seq[T]=
+proc replicate*[T](a:int,b:T):seq[T]=
   for i in 0..<a:result.add(b)
 
-proc replicate[T](a:int,b:seq[T]):seq[seq[T]]=
+proc replicate*[T](a:int,b:seq[T]):seq[seq[T]]=
   for i in 0..<a:result.add(b)
 
-iterator cycle[T](x:seq[T]):T=
+iterator cycle*[T](x:seq[T]):T=
   var counter:int = 0
   while true:
     if(counter==x.len):counter -= x.len
     yield x[counter]
     inc counter
 
-iterator cycle(x:string):char=
+iterator cycle*(x:string):char=
   var counter:int = 0
   while true:
     if(counter==x.len):counter -= x.len
