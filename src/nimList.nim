@@ -797,3 +797,18 @@ proc partition*[S,T](f:proc(x:S):bool{. closure .}, x:seq[T]):(seq[T],seq[T])=
     )
   return (resFst,resSnd)
 
+proc `!!`*[T](x:seq[T],i:int):T=
+  return x[i]
+
+proc `!!`*(x:string,i:int):char=
+  return x[i]
+
+proc elemIndices*[T](x:T,xs:seq[T]):seq[int]=
+  for ix,i in xs:
+    if(i==x):result.add(ix)
+
+proc elemIndices*(x:char,xs:string):seq[int]=
+  runnableExamples:
+    doAssert elemIndices('o',"Hello World") == @[4,7]
+  for ix,i in xs:
+    if(i==x):result.add(ix)
