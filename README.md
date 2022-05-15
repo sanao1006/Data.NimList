@@ -57,4 +57,6 @@ Please point out any mistakes!
  * __Searching with a predicate__
    * find
    * partition
-...coming soon
+ * __Index lists__
+   * (!!)
+   * elemIndices
