@@ -155,6 +155,11 @@ window.addEventListener('DOMContentLoaded', main);
     title="elemIndices[T](x: T; xs: seq[T]): seq[int]">elemIndices[T](x: T; xs: seq[T]): seq[int]</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">findIndex
+      <li><a class="reference" href="#findIndex%2CopenArray%5BT%5D%2Cproc%28T%29"
+    title="findIndex[T](x: openArray[T]; f: proc (x: T): bool {.closure.}): Option[int]">findIndex[T](x: openArray[T]; f: proc (x: T): bool {.closure.}): Option[int]</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">findList
       <li><a class="reference" href="#findList%2Cproc%28S%29%2Cseq%5BT%5D"
     title="findList[T, S](f: proc (x: S): bool {.closure.}; x: seq[T]): Option[T]">findList[T, S](f: proc (x: S): bool {.closure.}; x: seq[T]): Option[T]</a></li>
@@ -632,6 +637,19 @@ Append two lists
 <dd>
 
 
+
+</dd>
+</div>
+<div id="findIndex,openArray[T],proc(T)">
+<dt><pre><span class="Keyword">proc</span> <a href="#findIndex%2CopenArray%5BT%5D%2Cproc%28T%29"><span class="Identifier">findIndex</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">f</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">closure</span>.}<span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span></pre></dt>
+<dd>
+
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">options</span><span class="Punctuation">,</span><span class="Identifier">strutils</span><span class="Punctuation">,</span><span class="Identifier">sugar</span>
+<span class="Identifier">doAssert</span> <span class="StringLit">&quot;haskell&quot;</span><span class="Operator">.</span><span class="Identifier">findIndex</span><span class="Punctuation">(</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span><span class="Identifier">char</span><span class="Punctuation">)</span> <span class="Operator">-&gt;</span> <span class="Identifier">bool</span> <span class="Operator">=&gt;</span> <span class="Identifier">x</span><span class="Operator">&gt;</span><span class="CharLit">'o'</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Identifier">some</span><span class="Punctuation">(</span><span class="DecNumber">2</span><span class="Punctuation">)</span>
+<span class="Identifier">doAssert</span> <span class="StringLit">&quot;haskell&quot;</span><span class="Operator">.</span><span class="Identifier">findIndex</span><span class="Punctuation">(</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span><span class="Identifier">char</span><span class="Punctuation">)</span> <span class="Operator">-&gt;</span> <span class="Identifier">bool</span> <span class="Operator">=&gt;</span> <span class="Identifier">x</span><span class="Operator">&gt;</span><span class="CharLit">'t'</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Identifier">none</span><span class="Punctuation">(</span><span class="Identifier">int</span><span class="Punctuation">)</span>
+<span class="Identifier">doAssert</span> <span class="StringLit">&quot;Hello World!&quot;</span><span class="Operator">.</span><span class="Identifier">findIndex</span><span class="Punctuation">(</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span><span class="Identifier">char</span><span class="Punctuation">)</span><span class="Operator">-&gt;</span><span class="Identifier">bool</span><span class="Operator">=&gt;</span><span class="Identifier">x</span><span class="Operator">.</span><span class="Identifier">isSpaceAscii</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Identifier">some</span><span class="Punctuation">(</span><span class="DecNumber">5</span><span class="Punctuation">)</span></pre>
 
 </dd>
 </div>
@@ -1338,7 +1356,7 @@ Return the first element of a list and the rest
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2022-05-15 10:35:12 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-05-29 08:49:46 UTC</small>
       </div>
     </div>
   </div>

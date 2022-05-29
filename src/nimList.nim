@@ -812,3 +812,15 @@ proc elemIndices*(x:char,xs:string):seq[int]=
     doAssert elemIndices('o',"Hello World") == @[4,7]
   for ix,i in xs:
     if(i==x):result.add(ix)
+
+proc findIndex*[T](x:openarray[T],f:proc(x:T):bool{. closure .}):Option[int]=
+  runnableExamples:
+    import options,strutils,sugar
+    doAssert "haskell".findIndex((x:char) -> bool => x>'o') == some(2)
+    doAssert "haskell".findIndex((x:char) -> bool => x>'t') == none(int)
+    doAssert "Hello World!".findIndex((x:char)->bool=>x.isSpaceAscii) == some(5)
+  let
+    res:seq[T] = x.filter(f)
+    table=zip(x,(0..x.len.pred).toSeq).toTable()
+  if(res.null):return none(int)
+  else:return some(table[res[0]])
